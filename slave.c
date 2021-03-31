@@ -26,10 +26,9 @@ int main(int argc, char const *argv[]) {
 
         
         
-        //char *const params[] = {command, NULL};
-        char *const params[] = {"minisat ./files/pigeon-hole/hole6.cnf |  grep -o -e \"Number of.*[0-9]\\+\" -e \"CPU time.*\" -e \".*SATISFIABLE\"", NULL};
+        char *const params[] = {command, NULL};
+        // char *const params[] = {"minisat ./files/pigeon-hole/hole6.cnf |  grep -o -e \"Number of.*[0-9]\\+\" -e \"CPU time.*\" -e \".*SATISFIABLE\"", NULL};
         FILE * fp = popen(*params, "w");
-        sleep(1);
         pclose(fp);
         
 

@@ -14,34 +14,28 @@ int main(int argc, char const *argv[]) {
     int ppid = getpid();
     char *const *argvs = NULL;
     int i;
-    for ( i = 0; i < CHILD; i++) {
+    for ( i = 0; i < CHILD; i++){
         if (pipe(fd[i]) ==-1) {
             perror("pipe");
             exit(-1);
         }
-    }
-    for ( i = 0; i < CHILD; i++){
         if (ppid == getpid()) pidC[i] = fork();
         if (pidC[i]==-1) {
             perror("fork");
             exit(-1);
         } else if (pidC[i] == 0){ //hijo
-            // close(1);
+            close(1);
             close(0);
             dup(fd[i][0]);
-            // dup(fd[i][1]);
+            dup(fd[i][1]);
             close(fd[i][0]);
             close(fd[i][1]);
-            execv("./c",argvs); //crear esclavo
+            execv("./slave",argvs); //crear esclavo
             perror("execv");
             exit(-1);
         } //padre
-        close(1);
-        dup(fd[i][1]);
-        close(fd[i][1]);
-        close(fd[i][0]);
-    	setvbuf(stdout, NULL, _IONBF, 0);
-        write(fd[i][1],"hola",5);
+        write(fd[i][1],"files/pigeon-hole/hole6.cnf",5);
+        printf("hijo N:%d fdR: %d fdW: %d\n",i,fd[i][0],fd[i][1]);
     }
     
 	
