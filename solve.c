@@ -29,11 +29,10 @@ int main(int argc, char const *argv[]) {
             perror("fork");
             exit(-1);
         } else if (pidC[i] == 0){ //hijo
+            dup2(fd[i][0],0);
+            // dup2(fd[i][1],1);
             // close(1);
-            close(0);
-            dup(fd[i][0]);
-            // dup(fd[i][1]);
-            // close(fd[i][0]);
+            close(fd[i][0]);
             close(fd[i][1]);
             execv("./slave",argvs); //crear esclavo
             perror("execv");
@@ -41,7 +40,9 @@ int main(int argc, char const *argv[]) {
         } //padre
     }
     for ( i = 0; i < child; i++) {
-        write(fd[i][0],"files/pigeon-hole/hole6.cnf",28);
+        write(fd[i][1],"files/pigeon-hole/hole6.cnf",28);
+        close(fd[i][0]);
+        close(fd[i][1]);
     }
     
     sleep(1);
