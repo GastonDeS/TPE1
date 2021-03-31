@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <string.h>
-
-
+#include <sys/types.h>
+#include <sys/stat.h>
 
 int main(int argc, char const *argv[]) { 
 
@@ -28,7 +28,7 @@ int main(int argc, char const *argv[]) {
         
         //char *const params[] = {command, NULL};
         char *const params[] = {"minisat ./files/pigeon-hole/hole6.cnf |  grep -o -e \"Number of.*[0-9]\\+\" -e \"CPU time.*\" -e \".*SATISFIABLE\"", NULL};
-        FILE * fp = popen(params, "w");
+        FILE * fp = popen(*params, "w");
         sleep(1);
         pclose(fp);
         
@@ -36,4 +36,12 @@ int main(int argc, char const *argv[]) {
     }
  
     return 0;
+}
+
+int checkCNF(char *path){
+    struct stat buf;
+    int valid=1;
+    stat(path,&buf);
+    valid = S_ISDIR(buf.st_mode);
+    return valid;
 }
