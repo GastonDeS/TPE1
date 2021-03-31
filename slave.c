@@ -13,18 +13,14 @@ int main(int argc, char const *argv[]) {
     size_t buffSize = 0;
     size_t result;
 
-    while ((result = getline(&buff, &buffSize, stdin)) > 0){
-        
-        
+    // while ((result = getline(&buff, &buffSize, stdin)) > 0){
+        sleep(1);
+        result = getline(&buff, &buffSize, stdin);
         char command[minisat_size+result-1];
         buff[result-1] = 0;
         
-
         sprintf(command, minisat, buff);
-        //printf("%s",command);
-        
-
-        
+        printf("%s",command);
         
         char *const params[] = {command, NULL};
         // char *const params[] = {"minisat ./files/pigeon-hole/hole6.cnf |  grep -o -e \"Number of.*[0-9]\\+\" -e \"CPU time.*\" -e \".*SATISFIABLE\"", NULL};
@@ -32,7 +28,7 @@ int main(int argc, char const *argv[]) {
         pclose(fp);
         
 
-    }
+    // }
  
     return 0;
 }
