@@ -9,16 +9,24 @@
 #define CHILD 8
 
 int main(int argc, char const *argv[]) {
-    int pidC[CHILD]; //pid
-    int fd[CHILD][2];
+
+    int child = CHILD;
+    if (argc < child)
+    {
+        child = argc;
+    }
+    int pidC[child]; //pid
+    int fd[child][2];
     int ppid = getpid();
     char *const *argvs = NULL;
     int i;
-    for ( i = 0; i < CHILD; i++){
+    for ( i = 0; i < child; i++) {
         if (pipe(fd[i]) ==-1) {
             perror("pipe");
             exit(-1);
         }
+    }
+    for ( i = 0; i < child; i++){
         if (ppid == getpid()) pidC[i] = fork();
         if (pidC[i]==-1) {
             perror("fork");
@@ -37,7 +45,7 @@ int main(int argc, char const *argv[]) {
         write(fd[i][1],"files/pigeon-hole/hole6.cnf",5);
         printf("hijo N:%d fdR: %d fdW: %d\n",i,fd[i][0],fd[i][1]);
     }
-    
-	
+
+
     return 0;
 }
