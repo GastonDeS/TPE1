@@ -11,7 +11,7 @@
 int main(int argc, char const *argv[]) {
 
     int child = (CHILD<argc)?CHILD:argc;
-    child=1;
+    child=2;
     int pidC[child]; //pid
     int fd[child][2];
     int ppid = getpid();
@@ -31,7 +31,6 @@ int main(int argc, char const *argv[]) {
         } else if (pidC[i] == 0){ //hijo
             dup2(fd[i][0],0);
             // dup2(fd[i][1],1);
-            // close(1);
             close(fd[i][0]);
             close(fd[i][1]);
             execv("./slave",argvs); //crear esclavo
@@ -40,12 +39,11 @@ int main(int argc, char const *argv[]) {
         } //padre
     }
     for ( i = 0; i < child; i++) {
-        write(fd[i][1],"files/pigeon-hole/hole6.cnf",28);
-        close(fd[i][0]);
-        close(fd[i][1]);
+        if( write(fd[i][1],"files/pigeon-hole/hole6.cnf\n",28) == -1) {
+            perror("write");
+            exit(-1);
+        }
     }
     
-    sleep(1);
-
     return 0;
 }

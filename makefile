@@ -1,4 +1,4 @@
-all: slave solve view
+all: slave solve 
 
 slave:
 	gcc -g -Wall slave.c -o slave

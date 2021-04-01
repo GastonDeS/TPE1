@@ -18,7 +18,6 @@ int main(int argc, char const *argv[]) {
         buff[result-1] = 0;
         
         sprintf(command, minisat, buff);
-        printf("%s",command);
         
         char *const params[] = {command, NULL};
         // char *const params[] = {"minisat ./files/pigeon-hole/hole7.cnf |  grep -o -e \"Number of.*[0-9]\\+\" -e \"CPU time.*\" -e \".*SATISFIABLE\"", NULL};
