@@ -11,7 +11,7 @@
 int main(int argc, char const *argv[]) {
 
     int child = (CHILD<argc)?CHILD:argc;
-    child=2;
+    child=8;
     int pidC[child]; //pid
     int fd[child][2];
     int ppid = getpid();
@@ -40,20 +40,12 @@ int main(int argc, char const *argv[]) {
         close(fd[i][0]);
     }
     for ( i = 0; i < child; i++) {
-        if( write(fd[i][1],"files/pigeon-hole/hole6.cnf\n",29) == -1) {
+        if( write(fd[i][1],"files/pigeon-hole/hole6.cnf\n",28) == -1) {
             perror("write");
             exit(-1);
         }
-        
+        close(fd[i][1]);
     }
-    sleep(1);
-    for ( i = 0; i < child; i++) {
-        if( write(fd[i][1],"files/pigeon-hole/hole6.cnf\n",29) == -1) {
-            perror("write");
-            exit(-1);
-        }
-        
-    }
-    exit(-1);
+
     return 0;
 }
