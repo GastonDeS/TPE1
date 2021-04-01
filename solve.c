@@ -37,13 +37,23 @@ int main(int argc, char const *argv[]) {
             perror("execv");
             exit(-1);
         } //padre
+        close(fd[i][0]);
     }
     for ( i = 0; i < child; i++) {
-        if( write(fd[i][1],"files/pigeon-hole/hole6.cnf\n",28) == -1) {
+        if( write(fd[i][1],"files/pigeon-hole/hole6.cnf\n",29) == -1) {
             perror("write");
             exit(-1);
         }
+        
     }
-    
+    sleep(1);
+    for ( i = 0; i < child; i++) {
+        if( write(fd[i][1],"files/pigeon-hole/hole6.cnf\n",29) == -1) {
+            perror("write");
+            exit(-1);
+        }
+        
+    }
+    exit(-1);
     return 0;
 }

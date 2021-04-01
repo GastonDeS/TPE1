@@ -13,7 +13,7 @@ int main(int argc, char const *argv[]) {
     size_t buffSize = 0;
     size_t result;
 
-    while ((result = getline(&buff, &buffSize, stdin)) > 0){
+    while ((result = getline(&buff, &buffSize, stdin)) > 1){ //esta bien que sea mayor que uno
         char command[minisat_size+result-1];
         buff[result-1] = 0;
         
@@ -23,7 +23,8 @@ int main(int argc, char const *argv[]) {
         // char *const params[] = {"minisat ./files/pigeon-hole/hole7.cnf |  grep -o -e \"Number of.*[0-9]\\+\" -e \"CPU time.*\" -e \".*SATISFIABLE\"", NULL};
         FILE * fp = popen(*params, "w");
         pclose(fp);
-
+        buff =NULL;
+        buffSize =0;
     }
  
     return 0;
