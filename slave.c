@@ -24,7 +24,6 @@ int main(int argc, char const *argv[]) {
         sprintf(command, minisat, buff);
         char *const params[] = {command, NULL};
         
-        printf("%s\n",command);
         FILE * fp;
         if (( fp = popen(*params, "w")) == NULL ){
             perror("popen");
