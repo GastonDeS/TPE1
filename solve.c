@@ -13,7 +13,7 @@ void readAndPrint(int fd);
 int main(int argc, char const *argv[]) {
 
     int child = (CHILD<argc)?CHILD:argc;
-    child=1;
+    child=8;
     int pidC[child]; //pid
     int fdFtoS[child][2];
     int fdStoF[child][2];
@@ -38,15 +38,20 @@ int main(int argc, char const *argv[]) {
         } else if (pidC[i] == 0){ //hijo
             dup2(fdFtoS[i][0],0);
             dup2(fdStoF[i][1],1);
-            close(fdStoF[i][0]);
-            close(fdStoF[i][1]);
-            close(fdFtoS[i][0]);
-            close(fdFtoS[i][1]);
+            int j;
+            for ( j = 0; j < child; j++) {
+                close(fdStoF[j][0]);
+                close(fdStoF[j][1]);
+                close(fdFtoS[j][0]);
+                close(fdFtoS[j][1]);
+            }
+            
             execv("./slave",argvs); //crear esclavo
             perror("execv");
             exit(-1);
         } //padre
         close(fdFtoS[i][0]);
+        close(fdStoF[i][1]);
     }
     for ( i = 0; i < child; i++) {
         if( write(fdFtoS[i][1],"files/pigeon-hole/hole6.cnf\n",28) == -1) {
