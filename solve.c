@@ -15,10 +15,9 @@ int main(int argc, char **argv){
 
     //int child = (NUM_CHILD<argc)?NUM_CHILD:argc;
     //child=4;
-    int ppid = getpid();
     char *const *argvs = NULL;
     int fd[NUM_CHILD][2];
-    int pidC[NUM_CHILD];
+    //int pidC[NUM_CHILD];
 
     int i;
     for (i = 0; i < NUM_CHILD; i++){
@@ -37,8 +36,6 @@ int main(int argc, char **argv){
         if (pid == 0){  //hijo
             close(fdFatherToSon[WRITE]); //cierro los fd correspondientes al padre
             close(fdSonToFather[READ]);
-            close(1); //cierro los std fd
-            close(0);
             if (dup2(fdFatherToSon[READ], 0) < 0 || dup2(fdSonToFather[WRITE], 1) < 0)
             { // la entrada de escritura del pipe quedo conetada con el stdout
                 perror("dup2");
@@ -47,7 +44,7 @@ int main(int argc, char **argv){
             close(fdFatherToSon[READ]); 
             close(fdSonToFather[WRITE]); 
 
-            execv("./slave", NULL); 
+            execv("./slave", argvs); 
             perror("execv");
             exit(-1);
         }
@@ -58,7 +55,7 @@ int main(int argc, char **argv){
             fd[i][READ] = fdSonToFather[READ];
             fd[i][WRITE] = fdFatherToSon[WRITE];
 
-            pidC[i] = pid;
+           //pidC[i] = pid;
         }
     }
 
@@ -69,8 +66,8 @@ int main(int argc, char **argv){
     }
 
     //loop
-    int aux= 10;
-    while (aux){ // mientras haya cnf para analizar
+    while (1){ // mientras haya cnf para analizar
+
         fd_set readfds;
         FD_ZERO(&readfds);
         int i;
@@ -98,8 +95,7 @@ int main(int argc, char **argv){
                 //le mando el proximo archivo, sino cerrar el pipe
                 ready--;  
             }
-        }
-        aux--;
+        }   
     }
     return 0;
 }

@@ -6,7 +6,7 @@
 #include <errno.h>
 #include <stdlib.h>
 
-int checkCNF(const char *path);
+int checkFile(const char *path);
 
 int main(int argc, char const *argv[]) {
 
@@ -21,7 +21,7 @@ int main(int argc, char const *argv[]) {
         //preparacion de parametros para minisat
         char command[minisat_size+fileNameDim-1];
         fileName[fileNameDim-1] = 0; //le saco el salto de linea
-        checkCNF(fileName);//si no existe el archivo o no se permite la lectura termina la ejecucion 
+        checkFile(fileName);//si no existe el archivo o no se permite la lectura termina la ejecucion 
         sprintf(command, minisat, fileName);
         char *const params[] = {command, NULL};
     
@@ -34,7 +34,11 @@ int main(int argc, char const *argv[]) {
             perror("popen");
             exit(-1);
         }
-        minisatReturnDim = getdelim(&minisatReturn, &minisatReturnSize,'\0', fp); //falta ver errores
+        minisatReturnDim = getdelim(&minisatReturn, &minisatReturnSize,'\0', fp); 
+        if(minisatReturnDim == -1 && (errno == EINVAL || errno == ENOMEM)){
+            perror("getline");
+            exit(-1);
+        }
 
         //get pid
         char pid[10]; // Mejorar!!!
@@ -69,7 +73,7 @@ int main(int argc, char const *argv[]) {
     return 0;
 }
 
-int checkCNF(const char *path){
+int checkFile(const char *path){
     if(access(path, R_OK) == 0)
         return 0;
     perror("invalid path");
