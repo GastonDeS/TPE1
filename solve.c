@@ -10,7 +10,7 @@
 #define NUM_CHILD 8
 #define READ 0
 #define WRITE 1
-#define PATHS_INI 8
+#define PATHS_INI 16
 
 int main(int argc, char **argv){
 
