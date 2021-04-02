@@ -1,0 +1,105 @@
+close(3)                                = 0
+dup2(4, 1)                              = 1
+close(4)                                = 0
+execve("/usr/bin/minisat", ["minisat", "files/pigeon-hole/hole6.cnf"], [/* 7 vars */]) = 0
+brk(0)                                  = 0x1c29000
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc4520b5000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=23104, ...}) = 0
+mmap(NULL, 23104, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7fc4520af000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/libminisat.so.2", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\320A\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=80608, ...}) = 0
+mmap(NULL, 2177432, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fc451c83000
+mprotect(0x7fc451c96000, 2093056, PROT_NONE) = 0
+mmap(0x7fc451e95000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x12000) = 0x7fc451e95000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libz.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0 \"\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=109144, ...}) = 0
+mmap(NULL, 2204200, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fc451a68000
+mprotect(0x7fc451a82000, 2093056, PROT_NONE) = 0
+mmap(0x7fc451c81000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x19000) = 0x7fc451c81000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/usr/lib/x86_64-linux-gnu/libstdc++.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\260\270\5\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=1008120, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc4520ae000
+mmap(NULL, 3188384, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fc45175d000
+mprotect(0x7fc451849000, 2097152, PROT_NONE) = 0
+mmap(0x7fc451a49000, 40960, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xec000) = 0x7fc451a49000
+mmap(0x7fc451a53000, 83616, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fc451a53000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libm.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\200U\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=1051056, ...}) = 0
+mmap(NULL, 3146072, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fc45145c000
+mprotect(0x7fc45155c000, 2093056, PROT_NONE) = 0
+mmap(0x7fc45175b000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0xff000) = 0x7fc45175b000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libgcc_s.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\260*\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=90096, ...}) = 0
+mmap(NULL, 2185952, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fc451246000
+mprotect(0x7fc45125c000, 2093056, PROT_NONE) = 0
+mmap(0x7fc45145b000, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x15000) = 0x7fc45145b000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\34\2\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=1738176, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc4520ad000
+mmap(NULL, 3844640, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7fc450e9b000
+mprotect(0x7fc45103c000, 2097152, PROT_NONE) = 0
+mmap(0x7fc45123c000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1a1000) = 0x7fc45123c000
+mmap(0x7fc451242000, 14880, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7fc451242000
+close(3)                                = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc4520ac000
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc4520aa000
+arch_prctl(ARCH_SET_FS, 0x7fc4520aa740) = 0
+mprotect(0x7fc45123c000, 16384, PROT_READ) = 0
+mprotect(0x7fc45175b000, 4096, PROT_READ) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc4520a9000
+mprotect(0x7fc451a49000, 32768, PROT_READ) = 0
+mprotect(0x7fc451c81000, 4096, PROT_READ) = 0
+mprotect(0x7fc451e95000, 4096, PROT_READ) = 0
+mprotect(0x604000, 4096, PROT_READ)     = 0
+mprotect(0x7fc4520b7000, 4096, PROT_READ) = 0
+munmap(0x7fc4520af000, 23104)           = 0
+brk(0)                                  = 0x1c29000
+brk(0x1c4a000)                          = 0x1c4a000
+fstat(1, {st_mode=S_IFIFO|0600, st_size=0, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc4520b4000
+mmap(NULL, 4460544, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc450a5a000
+getrusage(RUSAGE_SELF, {ru_utime={0, 7048}, ru_stime={0, 0}, ...}) = 0
+rt_sigaction(SIGINT, {0x402cf0, [INT], SA_RESTORER|SA_RESTART, 0x7fc450ed00e0}, {SIG_DFL, [], 0}, 8) = 0
+rt_sigaction(SIGXCPU, {0x402cf0, [XCPU], SA_RESTORER|SA_RESTART, 0x7fc450ed00e0}, {SIG_DFL, [], 0}, 8) = 0
+open("files/pigeon-hole/hole6.cnf", O_RDONLY) = 3
+lseek(3, 0, SEEK_CUR)                   = 0
+read(3, "c File:  hole6.cnf\r\nc\r\nc SOURCE:"..., 8192) = 2721
+read(3, "", 5471)                       = 0
+close(3)                                = 0
+getrusage(RUSAGE_SELF, {ru_utime={0, 8179}, ru_stime={0, 0}, ...}) = 0
+rt_sigaction(SIGINT, {0x4027a0, [INT], SA_RESTORER|SA_RESTART, 0x7fc450ed00e0}, {0x402cf0, [INT], SA_RESTORER|SA_RESTART, 0x7fc450ed00e0}, 8) = 0
+rt_sigaction(SIGXCPU, {0x4027a0, [XCPU], SA_RESTORER|SA_RESTART, 0x7fc450ed00e0}, {0x402cf0, [XCPU], SA_RESTORER|SA_RESTART, 0x7fc450ed00e0}, 8) = 0
+munmap(0x7fc450a5a000, 4460544)         = 0
+getrusage(RUSAGE_SELF, {ru_utime={0, 8689}, ru_stime={0, 0}, ...}) = 0
+getrusage(RUSAGE_SELF, {ru_utime={0, 12497}, ru_stime={0, 0}, ...}) = 0
+getpid()                                = 315
+open("/proc/315/status", O_RDONLY)      = 3
+fstat(3, {st_mode=S_IFREG|0444, st_size=0, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7fc4520b3000
+read(3, "Name:\tminisat\nUmask:\t0022\nState:"..., 1024) = 1004
+close(3)                                = 0
+munmap(0x7fc4520b3000, 4096)            = 0
+write(1, "WARNING: for repeatability, sett"..., 1765) = 1765
+exit_group(20)                          = ?
++++ exited with 20 +++

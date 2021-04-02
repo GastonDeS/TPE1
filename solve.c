@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#define NUM_CHILD 8
+#define NUM_CHILD 2
 #define READ 0
 #define WRITE 1
 
@@ -64,12 +64,13 @@ int main(int argc, char **argv){
 
     //asignacion de la primera tanda de archivos
     for (i = 0; i < NUM_CHILD; i++){
-        if (write(fd[i][WRITE], "hole6.cnf\n", 10) < 0)
+        if (write(fd[i][WRITE], "files/pigeon-hole/hole6.cnf\n",28) < 0)
             perror("write");
     }
 
     //loop
-    while (1){ // mientras haya cnf para analisar
+    int aux= 10;
+    while (aux){ // mientras haya cnf para analizar
         fd_set readfds;
         FD_ZERO(&readfds);
         int i;
@@ -86,19 +87,21 @@ int main(int argc, char **argv){
         
         for (i = 0; i < NUM_CHILD && ready > 0; i++){ 
             if(FD_ISSET(fd[i][READ], &readfds) != 0){
-                
+        
                 //prueba de funcionamiento--------------------------------
-                char buff[512];
+                char buff[512]={0};
                 read(fd[i][READ], buff, sizeof(buff));
+                
                 printf("%s \n", buff);
 
                 //----------------------------------------------------------
-                
+
                 //lee el resultado 
                 //le mando el proximo archivo, sino cerrar el pipe
                 ready--;  
             }
         }
+        aux--;
     }
     return 0;
 }

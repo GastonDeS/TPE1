@@ -84,3 +84,87 @@ strace -ff -o out ./solve
 make clean
 make all
 strace -ff -o out ./solve
+ls
+make clear
+make clean
+make all
+apt-get install minisat
+clear
+strace -ff -o out ./solve
+clear
+make clear
+make clean
+make all
+strace -ff -o out ./solve
+make clear
+make n
+make clean
+clear
+make claer
+make claen
+make clean
+make all
+make all
+strace -ff -o out ./solve
+make clean
+make all
+make all
+strace -ff -o out ./solve
+clean
+clean
+clear
+make clar
+make all
+ls
+make all
+make clear
+make clean
+make all
+strace -f ./solve
+strace -o out ./solve
+clear
+make clean
+make all
+strace -o out ./solve
+clear
+make clean+
+make clean
+make all
+strace -o out ./solve
+clear
+make clean
+make all
+strace -o out ./solve
+make clean
+make all
+strace -o out ./solve
+exit
+xit
+end
+exit
+leave
+docker end
+strace -ff -o out ./solve
+files/pigeon-hole/hole6.cnfclear
+clear
+make clean
+make all
+strace -ff -o out ./solve
+make clean
+make all
+strace -ff -o out ./solve
+make clean
+make all
+make clean
+make clean
+make all
+strace -ff -o out ./solve
+make clean
+make all
+strace -ff -o out ./solve
+make clean
+make all
+strace -ff -o out ./solve
+strace -ff -o out ./solve
+clear
+valgrind ./solve

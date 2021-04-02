@@ -43,8 +43,8 @@ int main(int argc, char const *argv[]) {
 
         //imprimir resultado final
         fileName[numChar-1] = '\n'; //le vuelvo agregar el salo de linea
-        strcat(fileName, minisatReturn);
-        strcat(fileName,pid);
+        strcat(fileName, minisatReturn);// cambiar
+        strcat(fileName,pid);           // cambiar
         write(1, fileName, (minisatReturnDim+numChar+pidDim));
 
         pclose(fp);
