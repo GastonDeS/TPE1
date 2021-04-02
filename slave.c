@@ -14,10 +14,9 @@ int main(int argc, char const *argv[]) {
     int minisat_size = (sizeof(minisat)/sizeof(minisat[0]) -2); //la dimencion de minisat sin %s
     char *fileName = NULL;
     size_t fileNameSize = 0;
-    size_t fileNameDim;
+    ssize_t fileNameDim;
 
-    while ((fileNameDim = getdelim(&fileName, &fileNameSize, '\n',stdin)) > 0){ 
-        
+    while ((fileNameDim = getline(&fileName, &fileNameSize,stdin)) > 0){
         //preparacion de parametros para minisat
         char command[minisat_size+fileNameDim-1];
         fileName[fileNameDim-1] = 0; //le saco el salto de linea

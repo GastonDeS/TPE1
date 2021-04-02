@@ -10,6 +10,7 @@
 #define NUM_CHILD 8
 #define READ 0
 #define WRITE 1
+#define PATHS_INI 8
 
 int main(int argc, char **argv){
 
@@ -36,6 +37,8 @@ int main(int argc, char **argv){
         if (pid == 0){  //hijo
             close(fdFatherToSon[WRITE]); //cierro los fd correspondientes al padre
             close(fdSonToFather[READ]);
+            close(0);
+            close(1);
             if (dup2(fdFatherToSon[READ], 0) < 0 || dup2(fdSonToFather[WRITE], 1) < 0)
             { // la entrada de escritura del pipe quedo conetada con el stdout
                 perror("dup2");
@@ -55,27 +58,31 @@ int main(int argc, char **argv){
             fd[i][READ] = fdSonToFather[READ];
             fd[i][WRITE] = fdFatherToSon[WRITE];
 
-           //pidC[i] = pid;
         }
     }
 
     //asignacion de la primera tanda de archivos
-    for (i = 0; i < NUM_CHILD; i++){
-        if (write(fd[i][WRITE], "files/pigeon-hole/hole6.cnf\n",28) < 0)
+    int argCount;
+    for (argCount = 0; argCount < PATHS_INI; argCount++){
+        char path[4096]={0};
+        strcat(path,argv[argCount+1]);
+        strcat(path,"\n");
+        if (write(fd[argCount%NUM_CHILD][WRITE],path ,strlen(path)) < 0)
             perror("write");
     }
-
+    int goodCount =1;
     //loop
-    while (1){ // mientras haya cnf para analizar
-
+    while (goodCount < argc){ // mientras haya cnf para analizar
         fd_set readfds;
         FD_ZERO(&readfds);
-        int i;
+        int i,max=0;
         for (i = 0; i < NUM_CHILD; i++){
-            FD_SET(fd[i][READ], &readfds);
+            if (fd[i][READ] > 0) {
+                max = (fd[i][READ]>max)?fd[i][READ] : max; 
+                FD_SET(fd[i][READ], &readfds);
+            }
         }
-
-        int ready = select(fd[NUM_CHILD-1][READ]+1, &readfds, NULL, NULL, NULL);
+        int ready = select(max+1, &readfds, NULL, NULL, NULL);
 
         if (ready == -1) {  //compruebo errores del select
             perror("select()");
@@ -84,13 +91,23 @@ int main(int argc, char **argv){
         
         for (i = 0; i < NUM_CHILD && ready > 0; i++){ 
             if(FD_ISSET(fd[i][READ], &readfds) != 0){
-        
+                goodCount++;
                 //prueba de funcionamiento--------------------------------
                 char buff[512]={0};
                 read(fd[i][READ], buff, sizeof(buff));
                 printf("%s \n", buff);
                 //----------------------------------------------------------
-
+                //envio tasks
+                if (argCount < argc-1) {
+                    char path[4096]={0};
+                    char *vec;
+                    vec = strcat(path,argv[argCount+1]);
+                    vec = strcat(vec,"\n");
+                    if (write(fd[i][WRITE],vec ,strlen(vec)) < 0)
+                        perror("write");
+                    argCount++;
+                }
+                //----------------------------------------------------------
                 //lee el resultado 
                 //le mando el proximo archivo, sino cerrar el pipe
                 ready--;  
@@ -99,107 +116,3 @@ int main(int argc, char **argv){
     }
     return 0;
 }
-
-
-/*
-#define CHILD 8
-
-void readAndPrint(int fd);
-
-int main(int argc, char const *argv[]) {
-
-    int child = (CHILD<argc)?CHILD:argc;
-    child=4;
-    int pidC[child]; //pid
-    int fdFtoS[child][2];
-    int fdStoF[child][2];
-    int ppid = getpid();
-    char *const *argvs = NULL;
-    int i;
-    for ( i = 0; i < child; i++) {
-        if (pipe(fdFtoS[i]) ==-1) {
-            perror("pipe");
-            exit(-1);
-        }
-        if (pipe(fdStoF[i]) ==-1) {
-            perror("pipe");
-            exit(-1);
-        }
-    }
-    for ( i = 0; i < child; i++){
-        if (ppid == getpid()) pidC[i] = fork();
-        if (pidC[i]==-1) {
-            perror("fork");
-            exit(-1);
-        } else if (pidC[i] == 0){ //hijo
-            dup2(fdFtoS[i][0],0);
-            dup2(fdStoF[i][1],1);
-            int j;
-            for ( j = 0; j < child; j++) {
-                close(fdStoF[j][0]);
-                close(fdFtoS[j][1]);
-            }
-            for ( j = i; j < child; j++) { // en un for aparte ya que los fd anteriores a i ya fueron cerrados. evita errores en close.
-                close(fdStoF[j][1]);
-                close(fdFtoS[j][0]);
-            }
-            execv("./slave",argvs); //crear esclavo
-            perror("execv");
-            exit(-1);
-        } //padre
-        close(fdFtoS[i][0]);
-        close(fdStoF[i][1]);
-    }
-    for ( i = 0; i < child; i++) {
-        if( write(fdFtoS[i][1],"files/pigeon-hole/hole6.cnf\n",28) == -1) {
-            perror("write");
-            exit(-1);
-        }
-        close(fdFtoS[i][1]);
-    }
-
-    // select implementation
-    int pipe;
-    fd_set readfds;
-    struct timeval timeout;
-    //seteo los fd que se van a utilizar en el select
-    FD_ZERO(&readfds);
-    for ( i = 0; i < child; i++) {
-        FD_SET(fdStoF[i][0],&readfds);
-    }
-
-    timeout.tv_sec = 5;
-    timeout.tv_usec = 0;
-    
-    while ((pipe = select(fdStoF[child-1][0]+1,&readfds,NULL,NULL,&timeout)>0)){
-        
-        readAndPrint(fdStoF[pipe][0]);
-        //asigno tareas
-        // if( write(fdFtoS[i][1],"files/pigeon-hole/hole6.cnf\n",28) == -1) {
-        //     perror("write");
-        //     exit(-1);
-        // }
-
-        //re asigno a los fds para volver a select
-        FD_ZERO(&readfds);
-        for ( i = 0; i < child; i++) {
-            FD_SET(fdStoF[i][0],&readfds);
-        }
-    }
-    // fin de select
-
-    return 0;
-}
-
-void readAndPrint(int fd){ // recibe el fd a leer
-    char line[4096];
-    size_t linecap = 4096;
-    ssize_t linelen;
-    int linecount = 0;
-    while ((linelen= read(fd,line,linecap)) > 0) {
-        linecount++;
-        fwrite(line, linelen, 1, stdout);
-    }
-}
-
-*/

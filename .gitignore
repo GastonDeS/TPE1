@@ -3,5 +3,7 @@ c
 c.c
 solve
 slave
-slave
-slave
+run.sh
+.gitignore
+files/.DS_Store
+.DS_Store
