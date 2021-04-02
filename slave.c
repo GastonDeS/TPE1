@@ -14,13 +14,13 @@ int main(int argc, char const *argv[]) {
     int minisat_size = (sizeof(minisat)/sizeof(minisat[0]) -2); //la dimencion de minisat sin %s
     char *fileName = NULL;
     size_t fileNameSize = 0;
-    size_t numChar;
+    size_t fileNameDim;
 
-    while ((numChar = getdelim(&fileName, &fileNameSize, '\n',stdin)) > 0){ 
+    while ((fileNameDim = getdelim(&fileName, &fileNameSize, '\n',stdin)) > 0){ 
         
         //preparacion de parametros para minisat
-        char command[minisat_size+numChar-1];
-        fileName[numChar-1] = 0; //le saco el salto de linea
+        char command[minisat_size+fileNameDim-1];
+        fileName[fileNameDim-1] = 0; //le saco el salto de linea
         checkCNF(fileName);//si no existe el archivo o no se permite la lectura termina la ejecucion 
         sprintf(command, minisat, fileName);
         char *const params[] = {command, NULL};
@@ -34,7 +34,7 @@ int main(int argc, char const *argv[]) {
             perror("popen");
             exit(-1);
         }
-        minisatReturnDim = getdelim(&(minisatReturn), &minisatReturnSize,'\0', fp);
+        minisatReturnDim = getdelim(&minisatReturn, &minisatReturnSize,'\0', fp); //falta ver errores
 
         //get pid
         char pid[10]; // Mejorar!!!
@@ -42,16 +42,25 @@ int main(int argc, char const *argv[]) {
         pidDim = sprintf(pid, "%d\n", getpid());
 
         //imprimir resultado final
-        fileName[numChar-1] = '\n'; //le vuelvo agregar el salo de linea
-        strcat(fileName, minisatReturn);// cambiar
-        strcat(fileName,pid);           // cambiar
-        write(1, fileName, (minisatReturnDim+numChar+pidDim));
+        fileName[fileNameDim-1] = '\n'; //le vuelvo agregar el salto de linea
+        int resultDim = minisatReturnDim+fileNameDim+pidDim;
+        char result[resultDim];
+        int i;
+        for (i = 0; i < resultDim; i++){
+            if(i < fileNameDim)
+                result[i] = fileName[i];
+            else if(i < (fileNameDim+minisatReturnDim) )
+                result[i] = minisatReturn[i-fileNameDim];
+            else if(i < (fileNameDim+minisatReturnDim+pidDim))
+                result[i] = pid[i-(fileNameDim+minisatReturnDim)];
+        }
+        write(1, result, resultDim);
 
         pclose(fp);
         free(minisatReturn);
     }
 
-    if(numChar == -1 && (errno == EINVAL || errno == ENOMEM)){
+    if(fileNameDim == -1 && (errno == EINVAL || errno == ENOMEM)){
         perror("getline");
         exit(-1);
     }

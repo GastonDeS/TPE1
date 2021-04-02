@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <sys/time.h>
 
-#define NUM_CHILD 2
+#define NUM_CHILD 8
 #define READ 0
 #define WRITE 1
 
@@ -91,9 +91,7 @@ int main(int argc, char **argv){
                 //prueba de funcionamiento--------------------------------
                 char buff[512]={0};
                 read(fd[i][READ], buff, sizeof(buff));
-                
                 printf("%s \n", buff);
-
                 //----------------------------------------------------------
 
                 //lee el resultado 
