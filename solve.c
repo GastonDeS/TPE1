@@ -6,13 +6,43 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/time.h>
+#include <sys/shm.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <semaphore.h>
+#include <sys/mman.h>
 
 #define NUM_CHILD 8
 #define READ 0
 #define WRITE 1
 #define PATHS_INI 16
+#define ARG_SIZE_SHM 512
 
 int main(int argc, char **argv){
+
+    //falta envirle la shared mem al view
+
+    if (argc == 1) {
+        printf("Error en la cantiad de argunmentos/n");
+        return 1;
+    }
+
+    FILE * result = fopen("result.txt", "w");
+
+    char * shmName = "shared memory";
+    int fdShm = shm_open(shmName, O_CREAT | O_RDWR, 666);
+    if (fdShm == -1)
+    {
+        perror("shmopen");
+    }
+
+    int sizeShm = ARG_SIZE_SHM * (argc -1);
+    if (ftruncate(fdShm, sizeShm) == -1) {
+        perror("ftrunate");
+    }
+    
+    void * sharedMemory = mmap(0, sizeShm, PROT_READ | PROT_WRITE, MAP_SHARED, fdShm, 0);
+    
 
     //int child = (NUM_CHILD<argc)?NUM_CHILD:argc;
     //child=4;
