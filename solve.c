@@ -29,8 +29,12 @@ int main(int argc, char **argv){
 
     FILE * result = fopen("result.txt", "w");
 
-    char * shmName = "shared memory";
-    int fdShm = shm_open(shmName, O_CREAT | O_RDWR, 666);
+
+    if(setvbuf(stdout, NULL, _IONBF, 0))
+        throwError("Error setvbuf");
+
+    char * nameShm = "shared memory";
+    int fdShm = shm_open(nameShm, O_CREAT | O_RDWR, 666);
     if (fdShm == -1)
     {
         perror("shmopen");
@@ -42,6 +46,17 @@ int main(int argc, char **argv){
     }
     
     void * sharedMemory = mmap(0, sizeShm, PROT_READ | PROT_WRITE, MAP_SHARED, fdShm, 0);
+    if (sharedMemory == MAP_FAILED) {
+        perror("shared memory map");
+    }
+
+    sem_t *semShm = sem_open("semShm", O_CREAT, 700, 0);
+    if (semShm == SEM_FAILED){
+        perror("semaphore");
+    }
+
+    printf("%s %d\n", nameShm, sizeShm);
+    sleep(2);
     
 
     //int child = (NUM_CHILD<argc)?NUM_CHILD:argc;
