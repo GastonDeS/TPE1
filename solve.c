@@ -17,7 +17,7 @@
 #define SLAVE_PATH "./slave"
 #define PATHS_INI 16
 
-#define RESULT_FILE_NAME "result.txt"
+#define RESULT_FILE_NAME "result.rr"
 
 #define SHM_NAME "/sharedMemory"
 #define STEP_SHM 200
@@ -106,8 +106,8 @@ int main(int argc, char const *argv[]){
 
                 //envio respuesta el viewer
                 checkError(sprintf((char *)(pntShm),"%s \n", buff),"sprint");
-
                 checkError(sem_post(semShm),"post sem"); //revisar
+                pntShm += strlen(buff);
 
                 //envio tasks
                 if (fileSentCount < argc-1) {
@@ -133,7 +133,6 @@ int main(int argc, char const *argv[]){
     shm_unlink(SHM_NAME);
 
     return 0;
-
 }
 
 

@@ -78,7 +78,11 @@ int main(int argc, char const *argv[]) {
 
         checkError(sem_wait(semShm),"waiting semaphore");
         printf("%s\n", shIndex);
+
+        shIndex += strlen(shIndex);
         readsCount++;
+
+
     }
     return 0;
 }

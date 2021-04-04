@@ -1,0 +1,563 @@
+files/SW100-8-0/sw100-12.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.006058 s
+SATISFIABLE
+3360
+ 
+files/SW100-8-0/sw100-15.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004359 s
+SATISFIABLE
+3363
+ 
+files/SW100-8-0/sw100-13.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004516 s
+SATISFIABLE
+3361
+ 
+files/SW100-8-0/sw100-100.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004569 s
+SATISFIABLE
+3358
+ 
+files/SW100-8-0/sw100-11.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004193 s
+SATISFIABLE
+3359
+ 
+files/SW100-8-0/sw100-14.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004317 s
+SATISFIABLE
+3362
+ 
+files/SW100-8-0/sw100-10.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.008969 s
+SATISFIABLE
+3357
+ 
+files/SW100-8-0/sw100-1.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004578 s
+SATISFIABLE
+3356
+ 
+files/SW100-8-0/sw100-22.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004083 s
+SATISFIABLE
+3363
+ 
+files/SW100-8-0/sw100-20.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004622 s
+SATISFIABLE
+3361
+ 
+files/SW100-8-0/sw100-16.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004594 s
+SATISFIABLE
+3356
+ 
+files/SW100-8-0/sw100-2.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.000907 s
+SATISFIABLE
+3360
+ 
+files/SW100-8-0/sw100-19.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.003989 s
+SATISFIABLE
+3359
+ 
+files/SW100-8-0/sw100-21.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.010204 s
+SATISFIABLE
+3362
+ 
+files/SW100-8-0/sw100-18.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.005116 s
+SATISFIABLE
+3358
+ 
+files/SW100-8-0/sw100-17.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0 s
+SATISFIABLE
+3357
+ 
+files/SW100-8-0/sw100-24.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004224 s
+SATISFIABLE
+3363
+ 
+files/SW100-8-0/sw100-25.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004273 s
+SATISFIABLE
+3361
+ 
+files/SW100-8-0/sw100-3.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004485 s
+SATISFIABLE
+3356
+ 
+files/SW100-8-0/sw100-23.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.007212 s
+SATISFIABLE
+3360
+ 
+files/SW100-8-0/sw100-27.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.002646 s
+SATISFIABLE
+3359
+ 
+files/SW100-8-0/sw100-29.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.000915 s
+SATISFIABLE
+3357
+ 
+files/SW100-8-0/sw100-28.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004172 s
+SATISFIABLE
+3362
+ 
+files/SW100-8-0/sw100-26.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.000956 s
+SATISFIABLE
+3358
+ 
+files/SW100-8-0/sw100-30.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004863 s
+SATISFIABLE
+3363
+ 
+files/SW100-8-0/sw100-31.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004108 s
+SATISFIABLE
+3361
+ 
+files/SW100-8-0/sw100-32.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004704 s
+SATISFIABLE
+3356
+ 
+files/SW100-8-0/sw100-33.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.00439 s
+SATISFIABLE
+3360
+ 
+files/SW100-8-0/sw100-34.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004291 s
+SATISFIABLE
+3359
+ 
+files/SW100-8-0/sw100-37.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.008278 s
+SATISFIABLE
+3357
+ 
+files/SW100-8-0/sw100-36.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004456 s
+SATISFIABLE
+3358
+ 
+files/SW100-8-0/sw100-42.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004492 s
+SATISFIABLE
+3357
+ 
+files/SW100-8-0/sw100-39.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.003907 s
+SATISFIABLE
+3361
+ 
+files/SW100-8-0/sw100-41.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.002047 s
+SATISFIABLE
+3359
+ 
+files/SW100-8-0/sw100-35.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.002258 s
+SATISFIABLE
+3362
+ 
+files/SW100-8-0/sw100-38.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004154 s
+SATISFIABLE
+3363
+ 
+files/SW100-8-0/sw100-4.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004407 s
+SATISFIABLE
+3356
+ 
+files/SW100-8-0/sw100-40.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.01109 s
+SATISFIABLE
+3360
+ 
+files/SW100-8-0/sw100-46.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.003977 s
+SATISFIABLE
+3361
+ 
+files/SW100-8-0/sw100-5.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004185 s
+SATISFIABLE
+3357
+ 
+files/SW100-8-0/sw100-44.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.00439 s
+SATISFIABLE
+3358
+ 
+files/SW100-8-0/sw100-43.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004379 s
+SATISFIABLE
+3362
+ 
+files/SW100-8-0/sw100-49.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.002053 s
+SATISFIABLE
+3359
+ 
+files/SW100-8-0/sw100-48.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.012237 s
+SATISFIABLE
+3360
+ 
+files/SW100-8-0/sw100-47.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.010559 s
+SATISFIABLE
+3356
+ 
+files/SW100-8-0/sw100-52.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.001027 s
+SATISFIABLE
+3361
+ 
+files/SW100-8-0/sw100-50.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.002794 s
+SATISFIABLE
+3358
+ 
+files/SW100-8-0/sw100-45.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.020359 s
+SATISFIABLE
+3363
+ 
+files/SW100-8-0/sw100-54.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.003974 s
+SATISFIABLE
+3362
+ 
+files/SW100-8-0/sw100-51.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.001675 s
+SATISFIABLE
+3357
+ 
+files/SW100-8-0/sw100-56.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004117 s
+SATISFIABLE
+3356
+ 
+files/SW100-8-0/sw100-53.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004698 s
+SATISFIABLE
+3359
+ 
+files/SW100-8-0/sw100-6.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.009455 s
+SATISFIABLE
+3358
+ 
+files/SW100-8-0/sw100-58.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0 s
+SATISFIABLE
+3361
+ 
+files/SW100-8-0/sw100-57.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.001067 s
+SATISFIABLE
+3360
+ 
+files/SW100-8-0/sw100-60.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004267 s
+SATISFIABLE
+3362
+ 
+files/SW100-8-0/sw100-55.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0 s
+SATISFIABLE
+3363
+ 
+files/SW100-8-0/sw100-64.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.014806 s
+SATISFIABLE
+3361
+ 
+files/SW100-8-0/sw100-61.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.005962 s
+SATISFIABLE
+3359
+ 
+files/SW100-8-0/sw100-59.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.01472 s
+SATISFIABLE
+3357
+ 
+files/SW100-8-0/sw100-65.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.011574 s
+SATISFIABLE
+3358
+ 
+files/SW100-8-0/sw100-63.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.0044 s
+SATISFIABLE
+3356
+ 
+files/SW100-8-0/sw100-67.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.001202 s
+SATISFIABLE
+3362
+ 
+files/SW100-8-0/sw100-62.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.007049 s
+SATISFIABLE
+3360
+ 
+files/SW100-8-0/sw100-7.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004256 s
+SATISFIABLE
+3359
+ 
+files/SW100-8-0/sw100-71.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004596 s
+SATISFIABLE
+3361
+ 
+files/SW100-8-0/sw100-66.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.002068 s
+SATISFIABLE
+3363
+ 
+files/SW100-8-0/sw100-70.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004629 s
+SATISFIABLE
+3358
+ 
+files/SW100-8-0/sw100-72.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004283 s
+SATISFIABLE
+3360
+ 
+files/SW100-8-0/sw100-68.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004044 s
+SATISFIABLE
+3357
+ 
+files/SW100-8-0/sw100-73.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.000777 s
+SATISFIABLE
+3362
+ 
+files/SW100-8-0/sw100-69.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.008508 s
+SATISFIABLE
+3356
+ 
+files/SW100-8-0/sw100-78.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.003812 s
+SATISFIABLE
+3358
+ 
+files/SW100-8-0/sw100-74.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004172 s
+SATISFIABLE
+3363
+ 
+files/SW100-8-0/sw100-76.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.007339 s
+SATISFIABLE
+3359
+ 
+files/SW100-8-0/sw100-75.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.011731 s
+SATISFIABLE
+3361
+ 
+files/SW100-8-0/sw100-84.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004268 s
+SATISFIABLE
+3358
+ 
+files/SW100-8-0/sw100-79.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004478 s
+SATISFIABLE
+3356
+ 
+files/SW100-8-0/sw100-80.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.0039 s
+SATISFIABLE
+3360
+ 
+files/SW100-8-0/sw100-8.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004129 s
+SATISFIABLE
+3362
+ 
+files/SW100-8-0/sw100-77.cnf
+Number of variables:           500
+Number of clauses:  
