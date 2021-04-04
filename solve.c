@@ -16,15 +16,17 @@
 #define WRITE 1
 #define PATHS_INI 16
 #define SHM_NAME "/sharedMemory"
-#define SHM_STEP 200
 
-#define ARG_SIZE_SHM 512
+//#define SHM_STEP 200
+
+#define SIZE_SHM 512
 
 
+void* initShM(char* const name, int* fdShm, off_t* sizeShm);
 void checkError(int valueReturn, const char *errorMessage);
 void checkErrno(void* valueReturn, const char *errorMessage, void* numErrno);
 
-int main(int argc, char **argv){
+int main(int argc, char const *argv[]){
 
     if (argc == 1) {
         printf("Error en la cantiad de argumentos/n");
@@ -37,7 +39,8 @@ int main(int argc, char **argv){
     int fd[NUM_CHILD][2];
 
     //SHM
-    int sizeShm = SHM_STEP*(argc -1); 
+    //off_t sizeShm = SHM_STEP*(argc -1); 
+    off_t sizeShm = SHM_STEP;
     int fdShm;
     void * pntShm;
 
@@ -45,21 +48,20 @@ int main(int argc, char **argv){
     sem_t *semShm;
 
 
-    //FILE * result = fopen("result.txt", "w");
+    FILE * result = fopen("result.txt", "w");
 
     if(setvbuf(stdout, NULL, _IONBF, 0))//revisar
         perror("Error setvbuf");
 
-
-    checkError((fdShm=shm_open(SHM_NAME, O_CREAT | O_RDWR, 0666)), "shmopen");
-
-    checkError(ftruncate(fdShm, sizeShm),"ftrunate" );
-
-    checkErrno((pntShm=mmap(NULL, sizeShm, PROT_READ | PROT_WRITE, MAP_SHARED, fdShm, 0)), "SHM_map", MAP_FAILED);
+    pntShm = initShM(SHM_NAME, &fdShm, &sizeShm);
+    
+//    checkError((fdShm=shm_open(SHM_NAME, O_CREAT | O_RDWR, 0666)), "shmopen");
+//    checkError(ftruncate(fdShm, sizeShm),"ftrunate" );
+//    checkErrno((pntShm=mmap(NULL, sizeShm, PROT_READ | PROT_WRITE, MAP_SHARED, fdShm, 0)), "SHM_map", MAP_FAILED);
 
     checkErrno((semShm=sem_open("semShm", O_CREAT, 0700, 0)), "sem_open", SEM_FAILED);
 
-    printf("%s %d\n", SHM_NAME, sizeShm); //impreimo datos necesarios para view
+    printf("%s %d\n", SHM_NAME, (int)sizeShm); //impreimo datos necesarios para view
     sleep(2);
 
 
@@ -168,6 +170,7 @@ int main(int argc, char **argv){
     }
     close(fd[i][READ]);
     close(fd[i][WRITE]);
+    
     return 0;
 
 }
@@ -187,4 +190,10 @@ void checkErrno(void* valueReturn, const char *errorMessage, void* numErrno){
     }
 }
 
-void initShM()
+void* initShM(char* const name, int* fdShm, off_t* sizeShm){
+    void* pntShm;
+    checkError( ((*fdShm)=shm_open(name, O_CREAT | O_RDWR, 0666)) , "shmopen");
+    checkError(ftruncate(*fdShm, *sizeShm),"ftrunate" );
+    checkErrno( (pntShm=mmap(NULL, *sizeShm, PROT_READ | PROT_WRITE, MAP_SHARED, *fdShm, 0)) , "SHM_map", MAP_FAILED);
+    return pntShm;
+}

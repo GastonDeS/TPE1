@@ -33,8 +33,6 @@ int main(int argc, char const *argv[]) {
         tok = strtok(NULL, " ");
         sizeShm = atoi(tok);
         free(line);
-
-
     }
 
     else {
@@ -73,12 +71,15 @@ int main(int argc, char const *argv[]) {
 
     //el while para espear y leer de emoria compartida
     while (1) {
+        
         if (sem_wait(semShm) == -1) {
             perror("waiting semaphore");
             exit(-1);
         }
 
         printf("%s\n", shIndex);
+
+
 
         //shIndex += strlen(shIndex)+1;
         shIndex += SHM_STEP;
