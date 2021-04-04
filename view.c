@@ -8,7 +8,7 @@
 #include <semaphore.h>
 #include <sys/shm.h>
 
-#define SHM_STEP 200
+#define STEP_SHM 200
 
 void checkError(int valueReturn, const char *errorMessage){
     if(valueReturn == -1){
@@ -79,7 +79,7 @@ int main(int argc, char const *argv[]) {
         checkError(sem_wait(semShm),"waiting semaphore");
         printf("%s\n", shIndex);
 
-        shIndex += strlen(shIndex);
+        shIndex += STEP_SHM;
         readsCount++;
 
 
