@@ -15,85 +15,74 @@
 #define READ 0
 #define WRITE 1
 #define PATHS_INI 16
-#define ARG_SIZE_SHM 512
+#define SHM_NAME "/sharedMemory"
 #define SHM_STEP 200
 
+#define ARG_SIZE_SHM 512
 
-void checkError(int return, const char *errorMessage);
+
+void checkError(int valueReturn, const char *errorMessage);
+void checkErrno(void* valueReturn, const char *errorMessage, void* numErrno);
 
 int main(int argc, char **argv){
 
-    //falta envirle la shared mem al view
     if (argc == 1) {
         printf("Error en la cantiad de argumentos/n");
         return 1;
     }
-
-    //FILE * result = fopen("result.txt", "w");
-
-    if(setvbuf(stdout, NULL, _IONBF, 0))
-        perror("Error setvbuf");
-
-    char * nameShm = "/sharedMemory";
-    heckError((int fdShm = shm_open(nameShm, O_CREAT | O_RDWR, 0666)), "shmopen");
-    
-    //int fdShm = shm_open(nameShm, O_CREAT | O_RDWR, 0666);
-    //if (fdShm == -1){
-    //    perror("shmopen");
-    //    exit(-1);
-    //}
-
-    int sizeShm = SHM_STEP*(argc -1); 
-    if (ftruncate(fdShm, sizeShm) == -1) {
-        perror("ftrunate");
-        exit(-1);
-    }
-    
-    void * sharedMemory = mmap(NULL, sizeShm, PROT_READ | PROT_WRITE, MAP_SHARED, fdShm, 0);
-    if (sharedMemory == MAP_FAILED) {
-        perror("shared memory map");
-        exit(-1);
-    }
-
-    sem_t *semShm = sem_open("semShm", O_CREAT, 0700, 0);
-    if (semShm == SEM_FAILED){
-        perror("semaphore");
-        exit(-1);
-    }
-    
-
-    printf("%s %d\n", nameShm, sizeShm);
-    sleep(2);
 
     //int child = (NUM_CHILD<argc)?NUM_CHILD:argc;
     //child=4;
     char *const *argvs = NULL;
     int fd[NUM_CHILD][2];
 
+    //SHM
+    int sizeShm = SHM_STEP*(argc -1); 
+    int fdShm;
+    void * pntShm;
+
+    //Sem
+    sem_t *semShm;
+
+
+    //FILE * result = fopen("result.txt", "w");
+
+    if(setvbuf(stdout, NULL, _IONBF, 0))//revisar
+        perror("Error setvbuf");
+
+
+    checkError((fdShm=shm_open(SHM_NAME, O_CREAT | O_RDWR, 0666)), "shmopen");
+
+    checkError(ftruncate(fdShm, sizeShm),"ftrunate" );
+
+    checkErrno((pntShm=mmap(NULL, sizeShm, PROT_READ | PROT_WRITE, MAP_SHARED, fdShm, 0)), "SHM_map", MAP_FAILED);
+
+    checkErrno((semShm=sem_open("semShm", O_CREAT, 0700, 0)), "sem_open", SEM_FAILED);
+
+    printf("%s %d\n", SHM_NAME, sizeShm); //impreimo datos necesarios para view
+    sleep(2);
+
+
     int i;
     for (i = 0; i < NUM_CHILD; i++){
         int fdFatherToSon[2]; //father(1) ---> son(0)
         int fdSonToFather[2]; // son(1) ---> father(0)
-        if (pipe(fdFatherToSon) < 0 || pipe(fdSonToFather) < 0){ 
-            perror("pipe");
-            exit(-1);
-        }
+        
+        checkError(pipe(fdFatherToSon),"pipe_fdFatherToSon");
+        checkError(pipe(fdSonToFather),"pipe_fdSonToFather");
 
-        pid_t pid = fork();
-        if (pid < 0){
-            perror("fork");
-            exit(-1);
-        }
+        pid_t pid;
+        checkError((pid=fork()),"fork");
+        
         if (pid == 0){  //hijo
             close(fdFatherToSon[WRITE]); //cierro los fd correspondientes al padre
             close(fdSonToFather[READ]);
             close(0);
             close(1);
-            if (dup2(fdFatherToSon[READ], 0) < 0 || dup2(fdSonToFather[WRITE], 1) < 0)
-            { // la entrada de escritura del pipe quedo conetada con el stdout
-                perror("dup2");
-                exit(-1);
-            }
+
+            checkError(dup2(fdFatherToSon[READ], 0),"dup2_fdFatherToSon");
+            checkError(dup2(fdSonToFather[WRITE], 1),"dup2_fdSonToFather");            
+
             close(fdFatherToSon[READ]); 
             close(fdSonToFather[WRITE]); 
 
@@ -117,16 +106,13 @@ int main(int argc, char **argv){
         char path[4096]={0};
         strcat(path,argv[i+1]);
         strcat(path,"\n");
-        if (write(fd[i%NUM_CHILD][WRITE],path ,strlen(path)) < 0)
-            perror("write");
+
+        checkError(write(fd[i%NUM_CHILD][WRITE],path ,strlen(path)),"write");
         fileSentCount++;
     }
 
-    
     int fileRecivedCount = 0;
-    //char* shOriginal = (char *) sharedMemory;
-    char* shIndex = (char *) sharedMemory;
-
+    char* shIndex = (char *) pntShm;
 
     //loop
     while (fileRecivedCount < (argc-1)){ // mientras haya cnf para analizar
@@ -139,12 +125,8 @@ int main(int argc, char **argv){
                 FD_SET(fd[i][READ], &readfds);
             }
         }
-        int ready = select(max+1, &readfds, NULL, NULL, NULL);
-
-        if (ready == -1) {  //compruebo errores del select
-            perror("select()");
-            exit(EXIT_FAILURE);
-        }
+        int ready=0;
+        checkError((ready=select(max+1, &readfds, NULL, NULL, NULL)),"select");
         
         for (i = 0; i < NUM_CHILD && ready > 0; i++){ 
             if(FD_ISSET(fd[i][READ], &readfds) != 0){
@@ -162,11 +144,10 @@ int main(int argc, char **argv){
                 }
 
                 //envio respuesta el viewer
-                if(sprintf((char *)(shIndex),"%s \n", buff) < 0)
-                    perror("sprint:");
-                if (sem_post(semShm) < 0) {
-                    perror("post sem");
-                }
+                checkError(sprintf((char *)(shIndex),"%s \n", buff),"sprint");
+
+                checkError(sem_post(semShm),"post sem"); //revisar
+
                 //shIndex += strlen(buff) + 1;
                 shIndex += SHM_STEP;
                 
@@ -177,8 +158,8 @@ int main(int argc, char **argv){
                     char *vec;
                     vec = strcat(path,argv[fileSentCount+1]);
                     vec = strcat(vec,"\n");
-                    if (write(fd[i][WRITE],vec ,strlen(vec)) < 0)
-                        perror("write");
+
+                    checkError(write(fd[i][WRITE],vec ,strlen(vec)),"wirte_sendTasks");
                     fileSentCount++;
                 }
                 ready--; 
@@ -192,9 +173,18 @@ int main(int argc, char **argv){
 }
 
 
-void checkError(int return, const char *errorMessage){
-    if(return < 0){
+void checkError(int valueReturn, const char *errorMessage){
+    if(valueReturn < 0){
         perror(errorMessage);
-        exit(-1)
+        exit(-1);
     }
 }
+
+void checkErrno(void* valueReturn, const char *errorMessage, void* numErrno){
+    if(valueReturn == numErrno){
+        perror(errorMessage);
+        exit(EXIT_FAILURE);
+    }
+}
+
+void initShM()
