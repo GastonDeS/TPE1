@@ -15,7 +15,7 @@
 #define READ 0
 #define WRITE 1
 #define PATHS_INI 16
-#define ARG_SIZE_SHM 206
+#define ARG_SIZE_SHM 512
 
 int main(int argc, char **argv){
 
@@ -27,6 +27,9 @@ int main(int argc, char **argv){
     }
 
     //FILE * result = fopen("result.txt", "w");
+
+    if(setvbuf(stdout, NULL, _IONBF, 0))
+        perror("Error setvbuf");
 
     char * nameShm = "sharedMemory";
     int fdShm = shm_open(nameShm, O_CREAT | O_RDWR, 0666);
@@ -53,16 +56,10 @@ int main(int argc, char **argv){
         perror("semaphore");
         exit(-1);
     }
+    int index = 0;
 
     printf("%s %d\n", nameShm, sizeShm);
     sleep(2);
-
-    sprintf((char *)(sharedMemory), "esto funca??");
-    if (sem_post(semShm) < 0) {
-        perror("post sem");
-        exit(-1);
-    }
-    return 0;
 
     //int child = (NUM_CHILD<argc)?NUM_CHILD:argc;
     //child=4;
@@ -145,24 +142,17 @@ int main(int argc, char **argv){
                 //prueba de funcionamiento--------------------------------
                 char buff[512]={0};
                 read(fd[i][READ], buff, sizeof(buff));
-                printf("%s \n", buff);
-                //----------------------------------------------------------
-                //envio tasks
-                if (argCount < argc-1) {
-                    char path[4096]={0};
-                    char *vec;
-                    vec = strcat(path,argv[argCount+1]);
-                    vec = strcat(vec,"\n");
-                    if (write(fd[i][WRITE],vec ,strlen(vec)) < 0)
-                        perror("write");
-                    argCount++;
+                //write("%s \n", buff);
+                //if (write((char *)(sharedMemory),buff ,sizeof(buff)) < 0)
+                //    perror("write");
+                
+                sprintf((char *)(sharedMemory + index), buff);
+                if (sem_post(semShm) < 0) {
+                    perror("post sem");
                 }
-                //----------------------------------------------------------
-                //lee el resultado 
-                //le mando el proximo archivo, sino cerrar el pipe
-                ready--;  
+                index += strlen(buff) + 1;
             }
-        }   
+        }
     }
     return 0;
 }
