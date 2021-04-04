@@ -27,7 +27,7 @@ void checkErrno(void* valueReturn, const char *errorMessage, void* numErrno);
 int main(int argc, char const *argv[]){
 
     if (argc == 1) {
-        printf("Error en la cantiad de argumentos/n");
+        printf("bad argument count/n");
         return 1;
     }
 
@@ -47,16 +47,16 @@ int main(int argc, char const *argv[]){
 
     FILE* result;
 
-    checkErrno((result = fopen("result.txt", "w")), "open result file", NULL);
+    checkErrno((result = fopen("result.dat", "w")), "open result file", NULL);
 
     if(setvbuf(stdout, NULL, _IONBF, 0))//revisar
         perror("Error setvbuf");
 
     pntShm = initShM(SHM_NAME, &fdShm, &sizeShm);
 
-    checkErrno((semShm=sem_open("semShm", O_CREAT, 0700, 0)), "sem_open", SEM_FAILED);
+    checkErrno((semShm=sem_open("semShm", O_CREAT, 0600, 0)), "sem_open", SEM_FAILED);
 
-    printf("%s %d\n", SHM_NAME, (int)sizeShm); //impreimo datos necesarios para view
+    printf("%s %d %d\n", SHM_NAME, (int)sizeShm,argc-1); //impreimo datos necesarios para view
     sleep(2);
 
 
@@ -166,6 +166,9 @@ int main(int argc, char const *argv[]){
     close(fd[i][READ]);
     close(fd[i][WRITE]);
     fclose(result);
+    munmap(pntShm,sizeShm);
+    close(fdShm); //solo en el slove.c
+    shm_unlink(SHM_NAME);
     
     return 0;
 
@@ -173,9 +176,9 @@ int main(int argc, char const *argv[]){
 
 
 void checkError(int valueReturn, const char *errorMessage){
-    if(valueReturn < 0){
+    if(valueReturn == -1){
         perror(errorMessage);
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
 }
 
