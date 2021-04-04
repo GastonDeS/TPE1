@@ -1,0 +1,922 @@
+root@b755ab3621ee:~# ./solve files/SW100-8-0/* | strace ./view
+execve("./view", ["./view"], [/* 7 vars */]) = 0
+brk(0)                                  = 0x70f000
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+mmap(NULL, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0179a99000
+access("/etc/ld.so.preload", R_OK)      = -1 ENOENT (No such file or directory)
+open("/etc/ld.so.cache", O_RDONLY|O_CLOEXEC) = 3
+fstat(3, {st_mode=S_IFREG|0644, st_size=23104, ...}) = 0
+mmap(NULL, 23104, PROT_READ, MAP_PRIVATE, 3, 0) = 0x7f0179a93000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/librt.so.1", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P#\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0644, st_size=31784, ...}) = 0
+mmap(NULL, 2128920, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f0179673000
+mprotect(0x7f017967a000, 2093056, PROT_NONE) = 0
+mmap(0x7f0179879000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x6000) = 0x7f0179879000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libpthread.so.0", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\0\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0\320n\0\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=137384, ...}) = 0
+mmap(NULL, 2213008, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f0179456000
+mprotect(0x7f017946e000, 2093056, PROT_NONE) = 0
+mmap(0x7f017966d000, 8192, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x17000) = 0x7f017966d000
+mmap(0x7f017966f000, 13456, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f017966f000
+close(3)                                = 0
+access("/etc/ld.so.nohwcap", F_OK)      = -1 ENOENT (No such file or directory)
+open("/lib/x86_64-linux-gnu/libc.so.6", O_RDONLY|O_CLOEXEC) = 3
+read(3, "\177ELF\2\1\1\3\0\0\0\0\0\0\0\0\3\0>\0\1\0\0\0P\34\2\0\0\0\0\0"..., 832) = 832
+fstat(3, {st_mode=S_IFREG|0755, st_size=1738176, ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0179a92000
+mmap(NULL, 3844640, PROT_READ|PROT_EXEC, MAP_PRIVATE|MAP_DENYWRITE, 3, 0) = 0x7f01790ab000
+mprotect(0x7f017924c000, 2097152, PROT_NONE) = 0
+mmap(0x7f017944c000, 24576, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_DENYWRITE, 3, 0x1a1000) = 0x7f017944c000
+mmap(0x7f0179452000, 14880, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_FIXED|MAP_ANONYMOUS, -1, 0) = 0x7f0179452000
+close(3)                                = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0179a91000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0179a90000
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0179a8f000
+arch_prctl(ARCH_SET_FS, 0x7f0179a90700) = 0
+mprotect(0x7f017944c000, 16384, PROT_READ) = 0
+mprotect(0x7f017966d000, 4096, PROT_READ) = 0
+mprotect(0x7f0179879000, 4096, PROT_READ) = 0
+mprotect(0x7f0179a9b000, 4096, PROT_READ) = 0
+munmap(0x7f0179a93000, 23104)           = 0
+set_tid_address(0x7f0179a909d0)         = 6057
+set_robust_list(0x7f0179a909e0, 24)     = 0
+rt_sigaction(SIGRTMIN, {0x7f017945c9b0, [], SA_RESTORER|SA_SIGINFO, 0x7f0179465890}, NULL, 8) = 0
+rt_sigaction(SIGRT_1, {0x7f017945ca40, [], SA_RESTORER|SA_RESTART|SA_SIGINFO, 0x7f0179465890}, NULL, 8) = 0
+rt_sigprocmask(SIG_UNBLOCK, [RTMIN RT_1], NULL, 8) = 0
+getrlimit(RLIMIT_STACK, {rlim_cur=8192*1024, rlim_max=RLIM64_INFINITY}) = 0
+brk(0)                                  = 0x70f000
+brk(0x730000)                           = 0x730000
+read(0, "/", 1)                         = 1
+read(0, "s", 1)                         = 1
+read(0, "h", 1)                         = 1
+read(0, "a", 1)                         = 1
+read(0, "r", 1)                         = 1
+read(0, "e", 1)                         = 1
+read(0, "d", 1)                         = 1
+read(0, "M", 1)                         = 1
+read(0, "e", 1)                         = 1
+read(0, "m", 1)                         = 1
+read(0, "o", 1)                         = 1
+read(0, "r", 1)                         = 1
+read(0, "y", 1)                         = 1
+read(0, " ", 1)                         = 1
+read(0, "5", 1)                         = 1
+read(0, "1", 1)                         = 1
+read(0, "2", 1)                         = 1
+read(0, "0", 1)                         = 1
+read(0, "0", 1)                         = 1
+read(0, "\n", 1)                        = 1
+statfs("/dev/shm/", {f_type=0x1021994, f_bsize=4096, f_blocks=16384, f_bfree=16379, f_bavail=16379, f_files=805636, f_ffree=805633, f_fsid={0, 0}, f_namelen=255, f_frsize=4096}) = 0
+futex(0x7f017987a330, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+open("/dev/shm/sharedMemory", O_RDWR|O_CREAT|O_NOFOLLOW|O_CLOEXEC, 0666) = 3
+mmap(NULL, 2000, PROT_READ|PROT_WRITE, MAP_SHARED, 3, 0) = 0x7f0179a98000
+statfs("/dev/shm", {f_type=0x1021994, f_bsize=4096, f_blocks=16384, f_bfree=16379, f_bavail=16379, f_files=805636, f_ffree=805633, f_fsid={0, 0}, f_namelen=255, f_frsize=4096}) = 0
+futex(0x7f0179672330, FUTEX_WAKE_PRIVATE, 2147483647) = 0
+open("/dev/shm/sem.semShm", O_RDWR|O_NOFOLLOW) = 4
+fstat(4, {st_mode=S_IFREG|0700, st_size=32, ...}) = 0
+mmap(NULL, 32, PROT_READ|PROT_WRITE, MAP_SHARED, 4, 0) = 0x7f0179a97000
+close(4)                                = 0
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:1, enviado a 0x96
+) = 0
+resultado:2, enviado a 0x12e
+write(1, "files/SW100-8-0/sw100-1.cnf\nNumb"..., 150files/SW100-8-0/sw100-1.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004861 s
+SATISFIABLE
+6058
+) = 150
+fstat(1, {st_mode=S_IFCHR|0620, st_rdev=makedev(136, 0), ...}) = 0
+mmap(NULL, 4096, PROT_READ|PROT_WRITE, MAP_PRIVATE|MAP_ANONYMOUS, -1, 0) = 0x7f0179a96000
+write(1, "resultado:1, recivido en : 0x96,"..., 56resultado:1, recivido en : 0x96, largo del string: 150
+) = 56
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "files/SW100-8-0/sw100-14.cnf\nNum"..., 151files/SW100-8-0/sw100-14.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004828 s
+SATISFIABLE
+6064
+) = 151
+write(1, "resultado:2, recivido en : 0x12e"..., 57resultado:2, recivido en : 0x12e, largo del string: 151
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:3, enviado a 0x1c6
+) = 0
+write(1, "files/SW100-8-0/sw100-12.cnf\nNum"..., 151files/SW100-8-0/sw100-12.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004406 s
+SATISFIABLE
+6062
+) = 151
+resultado:4, enviado a 0x25e
+write(1, "resultado:3, recivido en : 0x1c6"..., 57resultado:3, recivido en : 0x1c6, largo del string: 151
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "files/SW100-8-0/sw100-10.cnf\nNum"..., 151files/SW100-8-0/sw100-10.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.007384 s
+SATISFIABLE
+6059
+) = 151
+write(1, "resultado:4, recivido en : 0x25e"..., 57resultado:4, recivido en : 0x25e, largo del string: 151
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:5, enviado a 0x2f6
+) = -1 EAGAIN (Resource temporarily unavailable)
+write(1, "files/SW100-8-0/sw100-11.cnf\nNum"..., 151files/SW100-8-0/sw100-11.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.001172 s
+SATISFIABLE
+6061
+) = 151
+write(1, "resultado:5, recivido en : 0x2f6"..., 57resultado:5, recivido en : 0x2f6, largo del string: 151
+) = 57
+resultado:6, enviado a 0x38f
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "files/SW100-8-0/sw100-100.cnf\nNu"..., 152resultado:7, enviado a 0x427
+resultado:8, enviado a 0x4bf
+resultado:9, enviado a 0x557
+files/SW100-8-0/sw100-100.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.005112 s
+SATISFIABLE
+6060
+) = 152
+write(1, "resultado:6, recivido en : 0x38f"..., 57resultado:6, recivido en : 0x38f, largo del string: 152
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "files/SW100-8-0/sw100-15.cnf\nNum"..., 151files/SW100-8-0/sw100-15.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.007218 s
+SATISFIABLE
+6065
+) = 151
+write(1, "resultado:7, recivido en : 0x427"..., 57resultado:7, recivido en : 0x427, largo del string: 151
+) = 57
+resultado:10, enviado a 0x5ee
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "files/SW100-8-0/sw100-13.cnf\nNum"..., 151files/SW100-8-0/sw100-13.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.003177 s
+SATISFIABLE
+6063
+) = 151
+write(1, "resultado:8, recivido en : 0x4bf"..., 57resultado:8, recivido en : 0x4bf, largo del string: 151
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "files/SW100-8-0/sw100-21.cnf\nNum"..., 151files/SW100-8-0/sw100-21.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004614 s
+SATISFIABLE
+6064
+) = 151
+write(1, "resultado:9, recivido en : 0x557"..., 57resultado:9, recivido en : 0x557, largo del string: 151
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "files/SW100-8-0/sw100-2.cnf\nNumb"..., 150files/SW100-8-0/sw100-2.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.009552 s
+SATISFIABLE
+6062
+) = 150
+write(1, "resultado:10, recivido en : 0x5e"..., 58resultado:10, recivido en : 0x5ee, largo del string: 150
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:11, enviado a 0x685
+) = 0
+write(1, "files/SW100-8-0/sw100-16.cnf\nNum"..., 150files/SW100-8-0/sw100-16.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.00738 s
+SATISFIABLE
+6058
+) = 150
+write(1, "resultado:11, recivido en : 0x68"..., 58resultado:11, recivido en : 0x685, largo del string: 150
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:12, enviado a 0x716
+) = 0
+write(1, "files/SW100-8-0/sw100-17.cnf\nNum"..., 144files/SW100-8-0/sw100-17.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0 s
+SATISFIABLE
+6059
+) = 144
+write(1, "resultado:12, recivido en : 0x71"..., 58resultado:12, recivido en : 0x716, largo del string: 144
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:13, enviado a 0x7ae
+) = 0
+write(1, "files/SW100-8-0/sw100-18.cnf\nNum"..., 151files/SW100-8-0/sw100-18.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004961 s
+SATISFIABLE
+6060
+) = 151
+write(1, "resultado:13, recivido en : 0x7a"..., 58resultado:13, recivido en : 0x7ae, largo del string: 151
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:14, enviado a 0x846
+) = 0
+write(1, "files/SW100-8-0/sw100-22.cnf\nNum"..., 151files/SW100-8-0/sw100-22.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.006621 s
+SATISFIABLE
+6065
+) = 151
+write(1, "resultado:14, recivido en : 0x84"..., 58resultado:14, recivido en : 0x846, largo del string: 151
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:15, enviado a 0x8de
+) = 0
+write(1, "files/SW100-8-0/sw100-19.cnf\nNum"..., 151files/SW100-8-0/sw100-19.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.009565 s
+SATISFIABLE
+6061
+) = 151
+write(1, "resultado:15, recivido en : 0x8d"..., 58resultado:15, recivido en : 0x8de, largo del string: 151
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULL) = 0
+write(1, "files/SW100-8-0/sw100-20.cnf\nNum"..., 151files/SW100-8-0/sw100-20.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.005118 s
+SATISFIABLE
+6063
+) = 151
+write(1, "resultado:16, recivido en : 0x97"..., 58resultado:16, recivido en : 0x976, largo del string: 151
+) = 58
+resultado:16, enviado a 0x976
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:17, enviado a 0xa0e
+) = 0
+write(1, "files/SW100-8-0/sw100-25.cnf\nNum"..., 151files/SW100-8-0/sw100-25.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.005804 s
+SATISFIABLE
+6062
+) = 151
+write(1, "resultado:17, recivido en : 0xa0"..., 58resultado:17, recivido en : 0xa0e, largo del string: 151
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:18, enviado a 0xaa5
+) = 0
+write(1, "files/SW100-8-0/sw100-24.cnf\nNum"..., 150files/SW100-8-0/sw100-24.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.00676 s
+SATISFIABLE
+6064
+) = 150
+write(1, "resultado:18, recivido en : 0xaa"..., 58resultado:18, recivido en : 0xaa5, largo del string: 150
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:19, enviado a 0xb3d
+) = 0
+write(1, "files/SW100-8-0/sw100-29.cnf\nNum"..., 151files/SW100-8-0/sw100-29.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004562 s
+SATISFIABLE
+6065
+) = 151
+write(1, "resultado:19, recivido en : 0xb3"..., 58resultado:19, recivido en : 0xb3d, largo del string: 151
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:20, enviado a 0xbd5
+) = 0
+write(1, "files/SW100-8-0/sw100-23.cnf\nNum"..., 151files/SW100-8-0/sw100-23.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004897 s
+SATISFIABLE
+6058
+) = 151
+write(1, "resultado:20, recivido en : 0xbd"..., 58resultado:20, recivido en : 0xbd5, largo del string: 151
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:21, enviado a 0xc6d
+) = 0
+write(1, "files/SW100-8-0/sw100-28.cnf\nNum"..., 151files/SW100-8-0/sw100-28.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.005599 s
+SATISFIABLE
+6060
+) = 151
+write(1, "resultado:21, recivido en : 0xc6"..., 58resultado:21, recivido en : 0xc6d, largo del string: 151
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:22, enviado a 0xd05
+) = 0
+write(1, "files/SW100-8-0/sw100-26.cnf\nNum"..., 151files/SW100-8-0/sw100-26.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.006006 s
+SATISFIABLE
+6059
+) = 151
+write(1, "resultado:22, recivido en : 0xd0"..., 58resultado:22, recivido en : 0xd05, largo del string: 151
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:23, enviado a 0xd9d
+) = 0
+resultado:24, enviado a 0xe35
+write(1, "files/SW100-8-0/sw100-27.cnf\nNum"..., 151files/SW100-8-0/sw100-27.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.006026 s
+SATISFIABLE
+6061
+) = 151
+write(1, "resultado:23, recivido en : 0xd9"..., 58resultado:23, recivido en : 0xd9d, largo del string: 151
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "files/SW100-8-0/sw100-35.cnf\nNum"..., 151files/SW100-8-0/sw100-35.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.004001 s
+SATISFIABLE
+6065
+) = 151
+write(1, "resultado:24, recivido en : 0xe3"..., 58resultado:24, recivido en : 0xe35, largo del string: 151
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:25, enviado a 0xecd
+) = 0
+write(1, "files/SW100-8-0/sw100-31.cnf\nNum"..., 151files/SW100-8-0/sw100-31.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.003941 s
+SATISFIABLE
+6062
+) = 151
+write(1, "resultado:25, recivido en : 0xec"..., 58resultado:25, recivido en : 0xecd, largo del string: 151
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:26, enviado a 0xf64
+) = 0
+write(1, "files/SW100-8-0/sw100-3.cnf\nNumb"..., 150files/SW100-8-0/sw100-3.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.003467 s
+SATISFIABLE
+6063
+) = 150
+write(1, "resultado:26, recivido en : 0xf6"..., 58resultado:26, recivido en : 0xf64, largo del string: 150
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:27, enviado a 0xffc
+) = 0
+write(1, "files/SW100-8-0/sw100-32.cnf\nNum"..., 151files/SW100-8-0/sw100-32.cnf
+Number of variables:           500
+Number of clauses:            3100
+CPU time              : 0.006165 s
+SATISFIABLE
+6058
+) = 151
+write(1, "resultado:27, recivido en : 0xff"..., 58resultado:27, recivido en : 0xffc, largo del string: 151
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:28, enviado a 0x1094
+resultado:29, enviado a 0x112c
+) = 0
+write(1, "filP\220\251y\1\177", 9filP��y)      = 9
+write(1, "resultado:28, recivido en : 0x10"..., 57resultado:28, recivido en : 0x1006, largo del string: 9
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:29, recivido en : 0x10"..., 57resultado:29, recivido en : 0x1007, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:30, enviado a 0x11bd
+) = 0
+write(1, "\226U\211y\1\177", 6�U�y)         = 6
+write(1, "resultado:30, recivido en : 0x10"..., 57resultado:30, recivido en : 0x100e, largo del string: 6
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:31, enviado a 0x1254
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:31, recivido en : 0x10"..., 57resultado:31, recivido en : 0x100f, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:32, enviado a 0x12ec
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:32, recivido en : 0x10"..., 57resultado:32, recivido en : 0x1010, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:33, enviado a 0x1384
+) = 0
+resultado:34, enviado a 0x141c
+write(1, "", 0)                         = 0
+write(1, "resultado:33, recivido en : 0x10"..., 57resultado:33, recivido en : 0x1011, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:34, recivido en : 0x10"..., 57resultado:34, recivido en : 0x1012, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:35, enviado a 0x14b4
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:35, recivido en : 0x10"..., 57resultado:35, recivido en : 0x1013, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:36, enviado a 0x154c
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:36, recivido en : 0x10"..., 57resultado:36, recivido en : 0x1014, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:37, enviado a 0x15e4
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:37, recivido en : 0x10"..., 57resultado:37, recivido en : 0x1015, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:38, enviado a 0x167c
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:38, recivido en : 0x10"..., 57resultado:38, recivido en : 0x1016, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULL) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:39, recivido en : 0x10"..., 57resultado:39, recivido en : 0x1017, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:39, enviado a 0x1714
+resultado:40, enviado a 0x17ac
+) = 0
+write(1, "\300H\211y\1\177", 6�H�y)         = 6
+write(1, "resultado:40, recivido en : 0x10"..., 57resultado:40, recivido en : 0x101e, largo del string: 6
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:41, enviado a 0x1844
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:41, recivido en : 0x10"..., 57resultado:41, recivido en : 0x101f, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:42, enviado a 0x18dc
+) = 0
+resultado:43, enviado a 0x1974
+write(1, "\26", 1)                      = 1
+write(1, "resultado:42, recivido en : 0x10"..., 57resultado:42, recivido en : 0x1021, largo del string: 1
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:43, recivido en : 0x10"..., 57resultado:43, recivido en : 0x1022, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:44, enviado a 0x1a0b
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:44, recivido en : 0x10"..., 57resultado:44, recivido en : 0x1023, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:45, enviado a 0x1aa3
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:45, recivido en : 0x10"..., 57resultado:45, recivido en : 0x1024, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:46, enviado a 0x1b3b
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:46, recivido en : 0x10"..., 57resultado:46, recivido en : 0x1025, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:47, enviado a 0x1bd3
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:47, recivido en : 0x10"..., 57resultado:47, recivido en : 0x1026, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:48, enviado a 0x1c6b
+) = 0
+write(1, "", 0)                         = 0
+resultado:49, enviado a 0x1d02
+resultado:50, enviado a 0x1d9a
+resultado:51, enviado a 0x1e32
+write(1, "resultado:48, recivido en : 0x10"..., 57resultado:48, recivido en : 0x1027, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:49, recivido en : 0x10"..., 57resultado:49, recivido en : 0x1028, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:50, recivido en : 0x10"..., 57resultado:50, recivido en : 0x1029, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:51, recivido en : 0x10"..., 57resultado:51, recivido en : 0x102a, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:52, enviado a 0x1eca
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:52, recivido en : 0x10"..., 57resultado:52, recivido en : 0x102b, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:53, enviado a 0x1f62
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:53, recivido en : 0x10"..., 57resultado:53, recivido en : 0x102c, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:54, enviado a 0x1ffa
+resultado:55, enviado a 0x2092
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:54, recivido en : 0x10"..., 57resultado:54, recivido en : 0x102d, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:55, recivido en : 0x10"..., 57resultado:55, recivido en : 0x102e, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:56, enviado a 0x2129
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:56, recivido en : 0x10"..., 57resultado:56, recivido en : 0x102f, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:57, enviado a 0x21c1
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:57, recivido en : 0x10"..., 57resultado:57, recivido en : 0x1030, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:58, enviado a 0x2259
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:58, recivido en : 0x10"..., 57resultado:58, recivido en : 0x1031, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:59, enviado a 0x22f1
+) = 0
+write(1, "", 0resultado:60, enviado a 0x2389
+)                         = 0
+write(1, "resultado:59, recivido en : 0x10"..., 57resultado:59, recivido en : 0x1032, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:60, recivido en : 0x10"..., 57resultado:60, recivido en : 0x1033, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:61, enviado a 0x2420
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:61, recivido en : 0x10"..., 57resultado:61, recivido en : 0x1034, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+resultado:62, enviado a 0x24b8
+write(1, "", 0)                         = 0
+write(1, "resultado:62, recivido en : 0x10"..., 57resultado:62, recivido en : 0x1035, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:63, enviado a 0x2549
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:63, recivido en : 0x10"..., 57resultado:63, recivido en : 0x1036, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:64, enviado a 0x25e1
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:64, recivido en : 0x10"..., 57resultado:64, recivido en : 0x1037, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18resultado:65, enviado a 0x2679
+-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:65, recivido en : 0x10"..., 57resultado:65, recivido en : 0x1038, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:66, enviado a 0x2711
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:66, recivido en : 0x10"..., 57resultado:66, recivido en : 0x1039, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:67, enviado a 0x27a9
+) = 0
+resultado:68, enviado a 0x2840
+write(1, "", 0)                         = 0
+write(1, "resultado:67, recivido en : 0x10"..., 57resultado:67, recivido en : 0x103a, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:68, recivido en : 0x10"..., 57resultado:68, recivido en : 0x103b, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:69, enviado a 0x28d8
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:69, recivido en : 0x10"..., 57resultado:69, recivido en : 0x103c, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:70, enviado a 0x2970
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:70, recivido en : 0x10"..., 57resultado:70, recivido en : 0x103d, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:71, enviado a 0x2a08
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:71, recivido en : 0x10"..., 57resultado:71, recivido en : 0x103e, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:72, enviado a 0x2aa0
+) = 0
+resultado:73, enviado a 0x2b37
+write(1, "", 0)                         = 0
+write(1, "resultado:72, recivido en : 0x10"..., 57resultado:72, recivido en : 0x103f, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18resultado:74, enviado a 0x2bcf
+-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:73, recivido en : 0x10"..., 57resultado:73, recivido en : 0x1040, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:74, recivido en : 0x10"..., 57resultado:74, recivido en : 0x1041, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:75, enviado a 0x2c67
+resultado:76, enviado a 0x2cff
+) = 0
+resultado:77, enviado a 0x2d97
+write(1, "", 0)                         = 0
+write(1, "resultado:75, recivido en : 0x10"..., 57resultado:75, recivido en : 0x1042, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:76, recivido en : 0x10"..., 57resultado:76, recivido en : 0x1043, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:77, recivido en : 0x10"..., 57resultado:77, recivido en : 0x1044, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:78, enviado a 0x2e2f
+) = 0
+write(1, "", 0resultado:79, enviado a 0x2ec7
+)                         = 0
+write(1, "resultado:78, recivido en : 0x10"..., 57resultado:78, recivido en : 0x1045, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+resultado:80, enviado a 0x2f5e
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:79, recivido en : 0x10"..., 57resultado:79, recivido en : 0x1046, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:80, recivido en : 0x10"..., 57resultado:80, recivido en : 0x1047, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:81, enviado a 0x2ff6
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:81, recivido en : 0x10"..., 57resultado:81, recivido en : 0x1048, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:82, enviado a 0x308e
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:82, recivido en : 0x10"..., 57resultado:82, recivido en : 0x1049, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:83, enviado a 0x3125
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:83, recivido en : 0x10"..., 57resultado:83, recivido en : 0x104a, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:84, enviado a 0x31bd
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:84, recivido en : 0x10"..., 57resultado:84, recivido en : 0x104b, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:85, enviado a 0x3255
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:85, recivido en : 0x10"..., 57resultado:85, recivido en : 0x104c, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:86, enviado a 0x32ed
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:86, recivido en : 0x10"..., 57resultado:86, recivido en : 0x104d, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:87, enviado a 0x3385
+) = 0
+write(1, "", 0resultado:88, enviado a 0x341d
+)                         = 0
+write(1, "resultado:87, recivido en : 0x10"..., 57resultado:87, recivido en : 0x104e, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:88, recivido en : 0x10"..., 57resultado:88, recivido en : 0x104f, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:89, enviado a 0x34b5
+) = 0
+write(1, "\240\220\251y\1\177", 6���y)      = 6
+resultado:90, enviado a 0x354d
+write(1, "resultado:89, recivido en : 0x10"..., 57resultado:89, recivido en : 0x1056, largo del string: 6
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:90, recivido en : 0x10"..., 57resultado:90, recivido en : 0x1057, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:91, enviado a 0x35e5
+) = 0
+write(1, "\226U\211y\1\177", 6�U�y)         = 6
+write(1, "resultado:91, recivido en : 0x10"..., 57resultado:91, recivido en : 0x105e, largo del string: 6
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:92, enviado a 0x367d
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:92, recivido en : 0x10"..., 57resultado:92, recivido en : 0x105f, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:93, enviado a 0x3715
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:93, recivido en : 0x10"..., 57resultado:93, recivido en : 0x1060, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:94, enviado a 0x37ad
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:94, recivido en : 0x10"..., 57resultado:94, recivido en : 0x1061, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:95, enviado a 0x3845
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:95, recivido en : 0x10"..., 57resultado:96, enviado a 0x38dd
+resultado:95, recivido en : 0x1062, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18resultado:97, enviado a 0x3975
+-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:96, recivido en : 0x10"..., 57resultado:96, recivido en : 0x1063, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+write(1, "", 0)                         = 0
+write(1, "resultado:97, recivido en : 0x10"..., 57resultado:97, recivido en : 0x1064, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:98, enviado a 0x3a0d
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:98, recivido en : 0x10"..., 57resultado:98, recivido en : 0x1065, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:99, enviado a 0x3aa5
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:99, recivido en : 0x10"..., 57resultado:99, recivido en : 0x1066, largo del string: 0
+) = 57
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULLresultado:100, enviado a 0x3b3a
+) = 0
+write(1, "", 0)                         = 0
+write(1, "resultado:100, recivido en : 0x1"..., 58resultado:100, recivido en : 0x1067, largo del string: 0
+) = 58
+write(1, "-----------------\n", 18-----------------
+)     = 18
+futex(0x7f0179a97000, FUTEX_WAIT, 0, NULL^X^Z
+[17]+  Stopped                 ./solve files/SW100-8-0/* | strace ./view
+root@b755ab3621ee:~#

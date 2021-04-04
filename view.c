@@ -8,15 +8,10 @@
 #include <semaphore.h>
 #include <sys/shm.h>
 
+#define SHM_STEP 200
+
 int main(int argc, char const *argv[]) {
 
-
-    //3. hacer el ciclo de lectura e impresion
-    /*while (1) {
-        wait(sem);
-        read();
-        ...
-    }*/
 
     if (setvbuf(stdin, NULL, _IONBF, 0) != 0)
         perror("Error Disable buffering");
@@ -73,14 +68,20 @@ int main(int argc, char const *argv[]) {
         exit(-1);
     }
 
-    char *charShm = (char *) sharedMemory;
+    //char* shOriginal = (char *) sharedMemory;
+    char* shIndex = (char *) sharedMemory;
+
     //el while para espear y leer de emoria compartida
     while (1) {
         if (sem_wait(semShm) == -1) {
             perror("waiting semaphore");
             exit(-1);
         }
-        printf("%s\n", charShm);
-        charShm += strlen(charShm)+1;
+
+        printf("%s\n", shIndex);
+
+        //shIndex += strlen(shIndex)+1;
+        shIndex += SHM_STEP;
+
     }   
 }
