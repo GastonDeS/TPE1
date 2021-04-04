@@ -10,4 +10,4 @@ view:
 	gcc -g -Wall -lrt view.c -o view -lrt -pthread
 
 clean:
-	rm slave solve view result.txt
+	rm slave solve view
