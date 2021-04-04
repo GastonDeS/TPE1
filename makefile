@@ -1,13 +1,13 @@
-all: slave solve 
+all: slave solve view
 
 slave:
 	gcc -g -Wall slave.c -o slave
 
 solve:
-	gcc -g -Wall -lrt solve.c -o solve
+	gcc -Wall -g -std=gnu99 solve.c -o solve -lrt -pthread
 
 view: 
-	gcc -g -Wall view.c -o view
+	gcc -g -Wall -lrt view.c -o view -lrt -pthread
 
 clean:
-	rm slave solve
+	rm slave solve view

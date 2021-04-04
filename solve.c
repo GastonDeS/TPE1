@@ -7,7 +7,6 @@
 #include <stdlib.h>
 #include <sys/time.h>
 #include <sys/shm.h>
-#include <sys/stat.h>
 #include <fcntl.h>
 #include <semaphore.h>
 #include <sys/mman.h>
@@ -16,48 +15,54 @@
 #define READ 0
 #define WRITE 1
 #define PATHS_INI 16
-#define ARG_SIZE_SHM 512
+#define ARG_SIZE_SHM 206
 
 int main(int argc, char **argv){
 
     //falta envirle la shared mem al view
 
     if (argc == 1) {
-        printf("Error en la cantiad de argunmentos/n");
+        printf("Error en la cantiad de argumentos/n");
         return 1;
     }
 
-    FILE * result = fopen("result.txt", "w");
+    //FILE * result = fopen("result.txt", "w");
 
-
-    if(setvbuf(stdout, NULL, _IONBF, 0))
-        throwError("Error setvbuf");
-
-    char * nameShm = "shared memory";
-    int fdShm = shm_open(nameShm, O_CREAT | O_RDWR, 666);
+    char * nameShm = "sharedMemory";
+    int fdShm = shm_open(nameShm, O_CREAT | O_RDWR, 0666);
     if (fdShm == -1)
     {
         perror("shmopen");
+        exit(-1);
     }
 
     int sizeShm = ARG_SIZE_SHM * (argc -1);
     if (ftruncate(fdShm, sizeShm) == -1) {
         perror("ftrunate");
+        exit(-1);
     }
     
     void * sharedMemory = mmap(0, sizeShm, PROT_READ | PROT_WRITE, MAP_SHARED, fdShm, 0);
     if (sharedMemory == MAP_FAILED) {
         perror("shared memory map");
+        exit(-1);
     }
 
-    sem_t *semShm = sem_open("semShm", O_CREAT, 700, 0);
+    sem_t *semShm = sem_open("semShm", O_CREAT, 0700, 0);
     if (semShm == SEM_FAILED){
         perror("semaphore");
+        exit(-1);
     }
 
     printf("%s %d\n", nameShm, sizeShm);
     sleep(2);
-    
+
+    sprintf((char *)(sharedMemory), "esto funca??");
+    if (sem_post(semShm) < 0) {
+        perror("post sem");
+        exit(-1);
+    }
+    return 0;
 
     //int child = (NUM_CHILD<argc)?NUM_CHILD:argc;
     //child=4;
