@@ -2,8 +2,8 @@
 #include <string.h>
 #include <stdlib.h>
 #include <sys/mman.h>
-#include <sys/stat.h> 
-#include <fcntl.h> 
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <semaphore.h>
 #include <sys/shm.h>
@@ -33,12 +33,12 @@ int main(int argc, char const *argv[]) {
     char nameShm[100] = {0};
     int sizeShm;
     int fileCount;
-    
+
     if (argc == 1) {
-        
+
         char *line = NULL;
         size_t len = 0;
-        
+
         checkError(getline(&line, &len, stdin),"getting line");
         char *tok = strtok(line, " ");
         strcpy(nameShm, tok);
@@ -59,11 +59,11 @@ int main(int argc, char const *argv[]) {
         perror("passed memory size");
         exit(-1);
     }
-    
+
     int fdShm = shm_open(nameShm, O_CREAT | O_RDWR, 0666);
     checkError(fdShm,"shmopen");
 
-    void * sharedMemory = mmap(0, sizeShm, PROT_READ | PROT_WRITE, MAP_SHARED, fdShm, 0);
+    void * sharedMemory = mmap(NULL, sizeShm, PROT_READ | PROT_WRITE, MAP_SHARED, fdShm, 0);
     checkErrno(sharedMemory,"shared memory map",MAP_FAILED);
 
     sem_t *semShm = sem_open("semShm", O_CREAT, 0600, 0);
@@ -75,7 +75,7 @@ int main(int argc, char const *argv[]) {
     //el while para espear y leer de emoria compartida
     int readsCount =0;
     while (readsCount < fileCount) {
-        
+
         checkError(sem_wait(semShm),"waiting semaphore");
         printf("%s\n", shIndex);
         readsCount++;
