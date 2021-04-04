@@ -14,12 +14,15 @@
 #define NUM_CHILD 8
 #define READ 0
 #define WRITE 1
+#define SLAVE_PATH "./slave"
 #define PATHS_INI 16
-#define SHM_NAME "/sharedMemory"
 
+#define RESULT_FILE_NAME "result.txt"
+
+#define SHM_NAME "/sharedMemory"
 #define STEP_SHM 200
 
-
+void initSlave(int slaveNum, int fd[][2], const char *path, char *const argv[]);
 void* initShM(char* const name, int* fdShm, off_t* sizeShm);
 void checkError(int valueReturn, const char *errorMessage);
 void checkErrno(void* valueReturn, const char *errorMessage, void* numErrno);
@@ -33,21 +36,15 @@ int main(int argc, char const *argv[]){
 
     //int child = (NUM_CHILD<argc)?NUM_CHILD:argc;
     //child=4;
-    char *const *argvs = NULL;
+    
     int fd[NUM_CHILD][2];
-
-    //SHM
-    //off_t sizeShm = SHM_STEP*(argc -1); 
-    off_t sizeShm = STEP_SHM*(argc-1) ;
+    off_t sizeShm = STEP_SHM*(argc-1);
     int fdShm;
     void * pntShm;
-
-    //Sem
     sem_t *semShm;
-
     FILE* result;
 
-    checkErrno((result = fopen("result.txt", "w")), "open result file", NULL);
+    checkErrno((result=fopen(RESULT_FILE_NAME, "w")), "open result file", NULL);
 
     if(setvbuf(stdout, NULL, _IONBF, 0))//revisar
         perror("Error setvbuf");
@@ -59,46 +56,11 @@ int main(int argc, char const *argv[]){
     printf("%s %d\n", SHM_NAME, (int)sizeShm); //impreimo datos necesarios para view
     sleep(2);
 
-
-    int i;
-    for (i = 0; i < NUM_CHILD; i++){
-        int fdFatherToSon[2]; //father(1) ---> son(0)
-        int fdSonToFather[2]; // son(1) ---> father(0)
-        
-        checkError(pipe(fdFatherToSon),"pipe_fdFatherToSon");
-        checkError(pipe(fdSonToFather),"pipe_fdSonToFather");
-
-        pid_t pid;
-        checkError((pid=fork()),"fork");
-        
-        if (pid == 0){  //hijo
-            close(fdFatherToSon[WRITE]); //cierro los fd correspondientes al padre
-            close(fdSonToFather[READ]);
-            close(0);
-            close(1);
-
-            checkError(dup2(fdFatherToSon[READ], 0),"dup2_fdFatherToSon");
-            checkError(dup2(fdSonToFather[WRITE], 1),"dup2_fdSonToFather");            
-
-            close(fdFatherToSon[READ]); 
-            close(fdSonToFather[WRITE]); 
-
-            execv("./slave", argvs); 
-            perror("execv");
-            exit(-1);
-        }
-        else{   //padre
-            close(fdSonToFather[WRITE]); //cierro los fd correspondientes al hijo
-            close(fdFatherToSon[READ]);
-
-            fd[i][READ] = fdSonToFather[READ];
-            fd[i][WRITE] = fdFatherToSon[WRITE];
-
-        }
-    }
+    initSlave(NUM_CHILD, fd, SLAVE_PATH, NULL);
 
     //asignacion de la primera tanda de archivos
     int fileSentCount = 0;
+    int i;  
     for (i = 0; i < PATHS_INI; i++){
         char path[4096]={0};
         strcat(path,argv[i+1]);
@@ -109,8 +71,7 @@ int main(int argc, char const *argv[]){
     }
 
     int fileRecivedCount = 0;
-
-
+    
     //loop
     while (fileRecivedCount < (argc-1)){ // mientras haya cnf para analizar
         fd_set readfds;
@@ -162,6 +123,7 @@ int main(int argc, char const *argv[]){
             }
         }
     }
+
     //printf("%d \n",fileRecivedCount);
     close(fd[i][READ]);
     close(fd[i][WRITE]);
@@ -175,7 +137,7 @@ int main(int argc, char const *argv[]){
 void checkError(int valueReturn, const char *errorMessage){
     if(valueReturn < 0){
         perror(errorMessage);
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
 }
 
@@ -190,6 +152,43 @@ void* initShM(char* const name, int* fdShm, off_t* sizeShm){
     void* pntShm;
     checkError( ((*fdShm)=shm_open(name, O_CREAT | O_RDWR, 0666)) , "shmopen");
     checkError(ftruncate(*fdShm, *sizeShm),"ftrunate" );
-    checkErrno( (pntShm=mmap(NULL, *sizeShm, PROT_READ | PROT_WRITE, MAP_SHARED, *fdShm, 0)) , "SHM_map", MAP_FAILED);
+    checkErrno( (pntShm=mmap(NULL, *sizeShm, PROT_WRITE, MAP_SHARED, *fdShm, 0)) , "SHM_map", MAP_FAILED);
     return pntShm;
+}
+
+void initSlave(int slaveNum, int fd[][2], const char *path, char *const argv[]){
+    int i;
+    for (i = 0; i < slaveNum; i++){
+        int fdFatherToSon[2]; //father(1) ---> son(0)
+        int fdSonToFather[2]; // son(1) ---> father(0)
+        
+        checkError(pipe(fdFatherToSon),"pipe_fdFatherToSon");
+        checkError(pipe(fdSonToFather),"pipe_fdSonToFather");
+
+        pid_t pid;
+        checkError((pid=fork()),"fork");
+        
+        if (pid == 0){  //hijo
+            close(fdFatherToSon[WRITE]); //cierro los fd correspondientes al padre
+            close(fdSonToFather[READ]);
+            close(0);
+            close(1);
+
+            checkError(dup2(fdFatherToSon[READ], 0),"dup2_fdFatherToSon");
+            checkError(dup2(fdSonToFather[WRITE], 1),"dup2_fdSonToFather");            
+
+            close(fdFatherToSon[READ]); 
+            close(fdSonToFather[WRITE]); 
+
+            execv(path, argv); 
+            exit(-1);
+        }
+        else{   //padre
+            close(fdSonToFather[WRITE]); //cierro los fd correspondientes al hijo
+            close(fdFatherToSon[READ]);
+
+            fd[i][READ] = fdSonToFather[READ];
+            fd[i][WRITE] = fdFatherToSon[WRITE];
+        }
+    }
 }

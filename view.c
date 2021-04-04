@@ -54,7 +54,7 @@ int main(int argc, char const *argv[]) {
         exit(-1);
     }
 
-    void * sharedMemory = mmap(0, 2000, PROT_READ | PROT_WRITE, MAP_SHARED, fdShm, 0);
+    void * sharedMemory = mmap(NULL, sizeShm, PROT_READ, MAP_SHARED, fdShm, 0);
     if (sharedMemory == MAP_FAILED) {
         perror("shared memory map");
         exit(-1);

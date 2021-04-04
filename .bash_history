@@ -1,176 +1,3 @@
-gcc -g -Wall slace.c -o slave
-gcc -g -Wall slave.c -o slave
-.salve
-./slave
-apt-get install minisat
-./slave
-make all
-make clean
-make all
-./solve 
-make clean
-./solve 
-make all
-./solve 
-./solve 
-make clean
-make all
-./solve 
-apt-get install minisat
-make all
-./solve 
-\ll
-ls
-sat
-minisat
-la
-ls
-apt install minisat
-cd
-la
-ls
-ls
-make clean
-make all
-./slave
-./solve
-make all
-make clean
-make all
-./solve
-make clean
-make all
-./solve
-make clean
-make all
-./solve
-valgrind ./solve
-valgrind -v ./solve
-clear
-ls
-make clean
-make all
-./solve
-make clean
-make all
-./solve
-strace ./solve
-strace -o 1 ./solve
-make clean
-make all
-strace -o 1 ./solve
-make clean
-make all
-strace -o 1 ./solve
-make clean
-make all
-strace -o 1 ./solve
-./solve
-make clean
-make all
-./solve
-ps
-ps -l
-claer
-clean
-claer
-clean
-clear
-make clear
-make clean
-make all
-./solve
-strace -ff -o out ./solve
-make clean
-make all
-strace -ff -o out ./solve
-ls
-make clear
-make clean
-make all
-apt-get install minisat
-clear
-strace -ff -o out ./solve
-clear
-make clear
-make clean
-make all
-strace -ff -o out ./solve
-make clear
-make n
-make clean
-clear
-make claer
-make claen
-make clean
-make all
-make all
-strace -ff -o out ./solve
-make clean
-make all
-make all
-strace -ff -o out ./solve
-clean
-clean
-clear
-make clar
-make all
-ls
-make all
-make clear
-make clean
-make all
-strace -f ./solve
-strace -o out ./solve
-clear
-make clean
-make all
-strace -o out ./solve
-clear
-make clean+
-make clean
-make all
-strace -o out ./solve
-clear
-make clean
-make all
-strace -o out ./solve
-make clean
-make all
-strace -o out ./solve
-exit
-xit
-end
-exit
-leave
-docker end
-strace -ff -o out ./solve
-files/pigeon-hole/hole6.cnfclear
-clear
-make clean
-make all
-strace -ff -o out ./solve
-make clean
-make all
-strace -ff -o out ./solve
-make clean
-make all
-make clean
-make clean
-make all
-strace -ff -o out ./solve
-make clean
-make all
-strace -ff -o out ./solve
-make clean
-make all
-strace -ff -o out ./solve
-strace -ff -o out ./solve
-clear
-valgrind ./solve
-ls
-apt-get install minisat
-man lseek
 make clean
 make all
 ./solve | /.view 
@@ -427,3 +254,247 @@ make clean all
 ./solve files/SW100-8-0/* | ./view
 make clean all
 ./solve files/SW100-8-0/* | ./view
+spt-get install minisat
+apt-get install minisat
+make clean all
+make clean all
+./solve files/SW100-8-0/* | ./view
+man 3 printf
+make clean all
+make clean all
+make clean
+make all
+./solve files/SW100-8-0/* | ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+strace ./solve files/SW100-8-0/* | ./view
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/* | ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+make clean all
+make all
+./solve files/SW100-8-0/* | ./view
+make clean all
+./solve files/SW100-8-0/* | strace ./view
+./solve files/SW100-8-0/* | ltrace ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+./solve files/SW100-8-0/* | strace ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+./solve files/SW100-8-0/* | strace ./view
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/* | ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+make clean all
+make clean all
+./solve files/SW100-8-0/* | ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+./solve files/SW100-8-0/* |vlafrind ./view
+./solve files/SW100-8-0/* | valgrind ./view
+man setvbuf
+make clean all
+make all
+make all
+clean
+clear
+make all
+make all
+man sem_open
+man SEM_FAILED
+make all
+make clean
+
+man sem_open
+clear
+make all
+make all
+make all
+man mmap
+make all
+make clean
+make all
+make clean
+clear
+make clean
+make all
+make clean
+make all
+make clean
+make all
+make clean
+make all
+make clean
+make all
+make clean
+make all
+./solve files/SW100-8-0/* 
+./solve files/SW100-8-0/* 
+make clean
+make all
+./solve files/SW100-8-0/* 
+strace -ff -o out ./solve files/SW100-8-0/* 
+man shm_open
+make clean
+make all
+make clean
+make all
+make clean
+make clean all
+make all
+clear
+make all
+make all
+clear
+make all
+make all
+make all
+clear
+make all
+make all
+make clean
+make all
+./solve files/SW100-8-0/* | ./view
+make clean all
+./solve files/SW100-8-0/* | ./view
+man fopen
+make clean all
+make clean all
+make all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/* | ./view
+strece -ff -o out ./solve files/SW100-8-0/* | ./view
+strace -ff -o out ./solve files/SW100-8-0/* | ./view
+make clean all
+clear
+make clean all
+make all
+
+make clean all
+make clean all
+./solve files/SW100-8-0/* | ./view
+make clean all
+clear
+make clean
+make all
+make all
+make all
+make all
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+make clear
+clear
+make claer
+make claen
+make clean
+make all
+./solve files/SW100-8-0/*
+make clear
+make clean
+
+./solve files/SW100-8-0/*
+man open
+man fopen
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+make clean allclear
+clean
+clear
+make clean all
+make all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+ls
+ls -a
+make clean all
+./solve files/SW100-8-0/*
+ll
+ll
+ls
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+make clean all
+./solve files/SW100-8-0/*
+./solve files/SW100-8-0/*
+exit
+ps -a
+kill -9 -1
+all
+ps
+exit
