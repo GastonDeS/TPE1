@@ -79,10 +79,5 @@ int main(int argc, char const *argv[]) {
 
         printf("%s\n", shIndex);
 
-
-
-        //shIndex += strlen(shIndex)+1;
-        shIndex += SHM_STEP;
-
     }   
 }

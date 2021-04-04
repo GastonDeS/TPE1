@@ -17,9 +17,7 @@
 #define PATHS_INI 16
 #define SHM_NAME "/sharedMemory"
 
-//#define SHM_STEP 200
-
-#define SIZE_SHM 512
+#define STEP_SHM 200
 
 
 void* initShM(char* const name, int* fdShm, off_t* sizeShm);
@@ -40,24 +38,21 @@ int main(int argc, char const *argv[]){
 
     //SHM
     //off_t sizeShm = SHM_STEP*(argc -1); 
-    off_t sizeShm = SHM_STEP;
+    off_t sizeShm = STEP_SHM*(argc-1) ;
     int fdShm;
     void * pntShm;
 
     //Sem
     sem_t *semShm;
 
+    FILE* result;
 
-    FILE * result = fopen("result.txt", "w");
+    checkErrno((result = fopen("result.txt", "w")), "open result file", NULL);
 
     if(setvbuf(stdout, NULL, _IONBF, 0))//revisar
         perror("Error setvbuf");
 
     pntShm = initShM(SHM_NAME, &fdShm, &sizeShm);
-    
-//    checkError((fdShm=shm_open(SHM_NAME, O_CREAT | O_RDWR, 0666)), "shmopen");
-//    checkError(ftruncate(fdShm, sizeShm),"ftrunate" );
-//    checkErrno((pntShm=mmap(NULL, sizeShm, PROT_READ | PROT_WRITE, MAP_SHARED, fdShm, 0)), "SHM_map", MAP_FAILED);
 
     checkErrno((semShm=sem_open("semShm", O_CREAT, 0700, 0)), "sem_open", SEM_FAILED);
 
@@ -114,7 +109,7 @@ int main(int argc, char const *argv[]){
     }
 
     int fileRecivedCount = 0;
-    char* shIndex = (char *) pntShm;
+
 
     //loop
     while (fileRecivedCount < (argc-1)){ // mientras haya cnf para analizar
@@ -141,18 +136,17 @@ int main(int argc, char const *argv[]){
                 }
                 fileRecivedCount++;
 
+                //escribir en result.txt
+                fprintf(result,"%s \n", buff);
+
                 if(fileRecivedCount > (argc-(PATHS_INI-NUM_CHILD)+1)){  //voy cerrando los hijos que le queda un solo 
                     fd[i][READ] = -1;
                 }
 
                 //envio respuesta el viewer
-                checkError(sprintf((char *)(shIndex),"%s \n", buff),"sprint");
+                checkError(sprintf((char *)(pntShm),"%s \n", buff),"sprint");
 
                 checkError(sem_post(semShm),"post sem"); //revisar
-
-                //shIndex += strlen(buff) + 1;
-                shIndex += SHM_STEP;
-                
 
                 //envio tasks
                 if (fileSentCount < argc-1) {
@@ -168,8 +162,10 @@ int main(int argc, char const *argv[]){
             }
         }
     }
+    //printf("%d \n",fileRecivedCount);
     close(fd[i][READ]);
     close(fd[i][WRITE]);
+    fclose(result);
     
     return 0;
 
