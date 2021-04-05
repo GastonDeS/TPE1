@@ -10,7 +10,6 @@ int main(int argc, char const *argv[]) {
     int fileCount;
 
     if (argc == 1) {
-
         char *line = NULL;
         size_t len = 0;
 

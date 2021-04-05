@@ -17,8 +17,9 @@ int main(int argc, char const *argv[]) {
         char *minisatReturn = NULL;
         size_t minisatReturnSize = 0;
         size_t minisatReturnDim;
-        FILE * fp;
-        checkErrno( ( fp=popen(*params, "r")), "popen",NULL);
+        
+        FILE* fp = popen(*params, "r");
+        checkErrno(fp, "popen",NULL);
         minisatReturnDim = getdelim(&minisatReturn, &minisatReturnSize,'\0', fp); 
         if(minisatReturnDim == -1 && (errno == EINVAL || errno == ENOMEM)){
             perror("getline");
