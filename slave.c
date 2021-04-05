@@ -1,34 +1,34 @@
 #include "slave.h"
 
+//hacer un free de comandReturn al finalizar su uso
+size_t runCommand( char *const params[],char *comandReturn );
+
 int main(int argc, char const *argv[]) {
 
-    //char const minisat[] = {"minisat %s | grep -o -e \"Number of.*[0-9]\\+\" -e \"CPU time.*\" -e \".*SATISFIABLE\""};
     int minisat_size = (sizeof(MINITA)/sizeof(MINITA[0]) -2); //la dimencion de minisat sin %s
     char *fileName = NULL;
     size_t fileNameSize = 0;
     ssize_t fileNameDim;
 
     while ((fileNameDim = getline(&fileName, &fileNameSize,stdin)) > 0){
-        //preparacion de parametros para minisat
         char command[minisat_size+fileNameDim-1];
         fileName[fileNameDim-1] = 0; //le saco el salto de linea
         checkFile(fileName);//si no existe el archivo o no se permite la lectura termina la ejecucion 
         sprintf(command, MINITA, fileName);
         char *const params[] = {command, NULL};
     
+        //char* minisatReturn = NULL;
+        //size_t minisatReturnDim = runCommand(params, minisatReturn);
         //minisat
-        FILE * fp;
         char *minisatReturn = NULL;
         size_t minisatReturnSize = 0;
         size_t minisatReturnDim;
-        if (( fp = popen(*params, "r")) == NULL ){
-            perror("popen");
-            exit(-1);
-        }
+        FILE * fp;
+        checkErrno( ( fp=popen(*params, "r")), "popen",NULL);
         minisatReturnDim = getdelim(&minisatReturn, &minisatReturnSize,'\0', fp); 
         if(minisatReturnDim == -1 && (errno == EINVAL || errno == ENOMEM)){
             perror("getline");
-            exit(-1);
+            exit(EXIT_FAILURE);
         }
 
         //get pid
@@ -50,9 +50,6 @@ int main(int argc, char const *argv[]) {
                 result[i] = pid[i-(fileNameDim+minisatReturnDim)];
         }
         write(1, result, resultDim);
-        
-
-        pclose(fp);
         free(minisatReturn);
     }
 
@@ -71,3 +68,17 @@ int checkFile(const char *path){
     perror("invalid path");
     exit(-1);
 }
+
+size_t runCommand( char *const params[],char *comandReturn ){
+    size_t commandReturnSize = 0;
+    FILE * fp;
+    checkErrno( ( fp=popen(*params, "r")), "popen",NULL);
+    size_t commandReturnDim = getdelim(&comandReturn, &commandReturnSize,'\0', fp); 
+    if(commandReturnDim == -1 && (errno == EINVAL || errno == ENOMEM)){
+        perror("getline");
+        exit(EXIT_FAILURE);
+    }
+    pclose(fp);
+    return commandReturnDim;
+}
+

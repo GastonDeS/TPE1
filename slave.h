@@ -8,6 +8,7 @@
 #include <sys/stat.h>
 #include <errno.h>
 #include <stdlib.h>
+#include "err.h"
 
 #define MINITA "minisat %s | grep -o -e \"Number of.*[0-9]\\+\" -e \"CPU time.*\" -e \".*SATISFIABLE\""
 
