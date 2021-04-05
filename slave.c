@@ -2,7 +2,7 @@
 
 int main(int argc, char const *argv[]) {
 
-    int minisat_size = (sizeof(MINITA)/sizeof(MINITA[0]) -2); //la dimencion de minisat sin %s
+    int minisat_size = (sizeof(MINISAT)/sizeof(MINISAT[0]) -2); //la dimencion de minisat sin %s
     char *fileName = NULL;
     size_t fileNameSize = 0;
     ssize_t fileNameDim;
@@ -11,7 +11,7 @@ int main(int argc, char const *argv[]) {
         char command[minisat_size+fileNameDim-1];
         fileName[fileNameDim-1] = 0; //le saco el salto de linea
         checkFile(fileName);//si no existe el archivo o no se permite la lectura termina la ejecucion 
-        sprintf(command, MINITA, fileName);
+        sprintf(command, MINISAT, fileName);
         char *const params[] = {command, NULL};
     
         char *minisatReturn = NULL;

@@ -10,7 +10,7 @@
 #include <stdlib.h>
 #include "err.h"
 
-#define MINITA "minisat %s | grep -o -e \"Number of.*[0-9]\\+\" -e \"CPU time.*\" -e \".*SATISFIABLE\""
+#define MINISAT "minisat %s | grep -o -e \"Number of.*[0-9]\\+\" -e \"CPU time.*\" -e \".*SATISFIABLE\""
 
 int checkFile(const char *path);
 

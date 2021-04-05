@@ -94,14 +94,14 @@ int main(int argc, char const *argv[]){
                 //envio tasks
                 if (countSlaveFiles[i]==0) {
                     if (fileSentCount < argc-1) {
-                    char path[4096]={0};
-                    char *vec;
-                    vec = strcat(path,argv[fileSentCount+1]);
-                    vec = strcat(vec,"\n");
+                        char path[4096]={0};
+                        char *vec;
+                        vec = strcat(path,argv[fileSentCount+1]);
+                        vec = strcat(vec,"\n");
 
-                    checkError(write(fd[i][WRITE],vec ,strlen(vec)),"write_sendTasks");
-                    fileSentCount++;
-                    countSlaveFiles[i]++;
+                        checkError(write(fd[i][WRITE],vec ,strlen(vec)),"write_sendTasks");
+                        fileSentCount++;
+                        countSlaveFiles[i]++;
                     }
                 }
                 

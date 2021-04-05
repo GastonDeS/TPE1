@@ -34,7 +34,7 @@ int main(int argc, char const *argv[]) {
     }
     if (sizeShm <= 0) {
         perror("passed memory size");
-        exit(-1);
+        exit(EXIT_FAILURE);
     }
 
     int fdShm = shm_open(nameShm, O_RDWR, 0666);
