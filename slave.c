@@ -1,17 +1,9 @@
-#include <stdio.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <errno.h>
-#include <stdlib.h>
-
-int checkFile(const char *path);
+#include "slave.h"
 
 int main(int argc, char const *argv[]) {
 
-    char const minisat[] = {"minisat %s | grep -o -e \"Number of.*[0-9]\\+\" -e \"CPU time.*\" -e \".*SATISFIABLE\""};
-    int minisat_size = (sizeof(minisat)/sizeof(minisat[0]) -2); //la dimencion de minisat sin %s
+    //char const minisat[] = {"minisat %s | grep -o -e \"Number of.*[0-9]\\+\" -e \"CPU time.*\" -e \".*SATISFIABLE\""};
+    int minisat_size = (sizeof(MINITA)/sizeof(MINITA[0]) -2); //la dimencion de minisat sin %s
     char *fileName = NULL;
     size_t fileNameSize = 0;
     ssize_t fileNameDim;
@@ -21,7 +13,7 @@ int main(int argc, char const *argv[]) {
         char command[minisat_size+fileNameDim-1];
         fileName[fileNameDim-1] = 0; //le saco el salto de linea
         checkFile(fileName);//si no existe el archivo o no se permite la lectura termina la ejecucion 
-        sprintf(command, minisat, fileName);
+        sprintf(command, MINITA, fileName);
         char *const params[] = {command, NULL};
     
         //minisat
@@ -45,7 +37,7 @@ int main(int argc, char const *argv[]) {
         pidDim = sprintf(pid, "%d\n", getpid());
 
         //imprimir resultado final
-        fileName[fileNameDim-1] = '\n'; //le vuelvo agregar el salto de linea
+        fileName[fileNameDim-1] = '\n'; //le vuelvo agregar el salto de linea       
         int resultDim = minisatReturnDim+fileNameDim+pidDim;
         char result[resultDim];
         int i;
@@ -58,6 +50,7 @@ int main(int argc, char const *argv[]) {
                 result[i] = pid[i-(fileNameDim+minisatReturnDim)];
         }
         write(1, result, resultDim);
+        
 
         pclose(fp);
         free(minisatReturn);

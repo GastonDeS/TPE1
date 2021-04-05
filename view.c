@@ -1,32 +1,7 @@
-#include <strings.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/mman.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include <semaphore.h>
-#include <sys/shm.h>
-
-#define STEP_SHM 200
-
-void checkError(int valueReturn, const char *errorMessage){
-    if(valueReturn == -1){
-        perror(errorMessage);
-        exit(-1);
-    }
-}
-
-void checkErrno(void* valueReturn, const char *errorMessage, void* numErrno){
-    if(valueReturn == numErrno){
-        perror(errorMessage);
-        exit(EXIT_FAILURE);
-    }
-}
+#include "view.h"
 
 int main(int argc, char const *argv[]) {
-
-
+    
     if (setvbuf(stdin, NULL, _IONBF, 0) != 0)
         perror("Error Disable buffering");
 

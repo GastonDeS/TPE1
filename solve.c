@@ -1,31 +1,5 @@
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <unistd.h>
-#include <dirent.h>
-#include <stdio.h>
-#include <string.h>
-#include <stdlib.h>
-#include <sys/time.h>
-#include <sys/shm.h>
-#include <fcntl.h>
-#include <semaphore.h>
-#include <sys/mman.h>
 
-#define NUM_CHILD 8
-#define READ 0
-#define WRITE 1
-#define SLAVE_PATH "./slave"
-#define PATHS_INI 16
-
-#define RESULT_FILE_NAME "result.txt"
-
-#define SHM_NAME "/sharedMemory"
-#define STEP_SHM 200
-
-void initSlave(int slaveNum, int fd[][2], const char *path, char *const argv[]);
-void* initShM(char* const name, int* fdShm, off_t* sizeShm);
-void checkError(int valueReturn, const char *errorMessage);
-void checkErrno(void* valueReturn, const char *errorMessage, void* numErrno);
+#include "solve.h"
 
 int main(int argc, char const *argv[]){
 
@@ -133,21 +107,6 @@ int main(int argc, char const *argv[]){
     shm_unlink(SHM_NAME);
 
     return 0;
-}
-
-
-void checkError(int valueReturn, const char *errorMessage){
-    if(valueReturn == -1){
-        perror(errorMessage);
-        exit(EXIT_FAILURE);
-    }
-}
-
-void checkErrno(void* valueReturn, const char *errorMessage, void* numErrno){
-    if(valueReturn == numErrno){
-        perror(errorMessage);
-        exit(EXIT_FAILURE);
-    }
 }
 
 void* initShM(char* const name, int* fdShm, off_t* sizeShm){
