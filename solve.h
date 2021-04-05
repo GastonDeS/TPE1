@@ -20,7 +20,7 @@
 #define WRITE 1
 #define SLAVE_PATH "./slave"
 #define PATHS_INI 16
-#define RESULT_FILE_NAME "result.txteeee"
+#define RESULT_FILE_NAME "result.txt"
 #define SHM_NAME "/sharedMemory"
 
 #define STEP_SHM 200//sacar de aca
