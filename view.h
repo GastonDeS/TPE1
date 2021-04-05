@@ -11,7 +11,7 @@
 #include <semaphore.h>
 #include <sys/shm.h>
 #include "err.h"
-
-#define STEP_SHM 200//sacar de aca
+#include "varG.h"
+#include <unistd.h>
 
 #endif 

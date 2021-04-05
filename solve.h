@@ -14,16 +14,16 @@
 #include <semaphore.h>
 #include <sys/mman.h>
 #include "err.h"
+#include "varG.h"
 
 #define NUM_CHILD 8
 #define READ 0
 #define WRITE 1
 #define SLAVE_PATH "./slave"
-#define PATHS_INI 16
+#define MIN_PATHS_INI 1
+#define PORC_PATHS
 #define RESULT_FILE_NAME "result.txt"
 #define SHM_NAME "/sharedMemory"
-
-#define STEP_SHM 200//sacar de aca
 
 void initSlave(int slaveNum, int fd[][2], const char *path, char *const argv[]);
 void* initShM(char* const name, int* fdShm, off_t* sizeShm);

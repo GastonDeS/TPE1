@@ -35,10 +35,10 @@ int main(int argc, char const *argv[]) {
         exit(-1);
     }
 
-    int fdShm = shm_open(nameShm, O_CREAT | O_RDWR, 0666);
+    int fdShm = shm_open(nameShm, O_RDWR, 0666);
     checkError(fdShm,"shmopen");
 
-    void * sharedMemory = mmap(NULL, sizeShm, PROT_READ | PROT_WRITE, MAP_SHARED, fdShm, 0);
+    void * sharedMemory = mmap(NULL, sizeShm, PROT_READ , MAP_SHARED, fdShm, 0);
     checkErrno(sharedMemory,"shared memory map",MAP_FAILED);
 
     sem_t *semShm = sem_open("semShm", O_CREAT, 0600, 0);
@@ -52,12 +52,15 @@ int main(int argc, char const *argv[]) {
     while (readsCount < fileCount) {
 
         checkError(sem_wait(semShm),"waiting semaphore");
-        printf("%s\n", shIndex);
+        printf("%s", shIndex);
 
         shIndex += STEP_SHM;
         readsCount++;
-
-
     }
+    checkError(munmap(sharedMemory,sizeShm),"munmap");
+    checkError(shm_unlink(nameShm),"shm_unlink");
+    checkError(sem_close(semShm),"sem_close");
+    checkError(close(fdShm),"close");
+
     return 0;
 }

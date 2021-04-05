@@ -1,4 +1,3 @@
-
 #include "solve.h"
 
 int main(int argc, char const *argv[]){
@@ -7,43 +6,51 @@ int main(int argc, char const *argv[]){
         printf("bad argument count/n");
         return 1;
     }
+    int child= NUM_CHILD;
+    if (NUM_CHILD > argc -1) {
+        child = argc -1;
+    }
+    int pathsIni = ((argc-1)/(5*child) < MIN_PATHS_INI)? MIN_PATHS_INI :  (argc-1)/(5*child);
+    pathsIni *= child ;
 
-    //int child = (NUM_CHILD<argc)?NUM_CHILD:argc;
-    //child=4;
-
-    int fd[NUM_CHILD][2];
+    int fd[child][2];
     off_t sizeShm = STEP_SHM*(argc-1);
     int fdShm;
     void * pntShm;
     sem_t *semShm;
     FILE* result;
+    void* pntShmIni;
 
     checkErrno((result=fopen(RESULT_FILE_NAME, "w")), "open result file", NULL);
 
-    if(setvbuf(stdout, NULL, _IONBF, 0))//revisar
+    if(setvbuf(stdout, NULL, _IONBF, 0))
         perror("Error setvbuf");
 
     pntShm = initShM(SHM_NAME, &fdShm, &sizeShm);
-
+    pntShmIni = pntShm;
     checkErrno((semShm=sem_open("semShm", O_CREAT, 0600, 0)), "sem_open", SEM_FAILED);
 
     printf("%s %d %d\n", SHM_NAME, (int)sizeShm,argc-1); //impreimo datos necesarios para view
     sleep(2);
 
-    initSlave(NUM_CHILD, fd, SLAVE_PATH, NULL);
+    initSlave(child, fd, SLAVE_PATH, NULL);
 
     //asignacion de la primera tanda de archivos
     int fileSentCount = 0;
     int i;
-    for (i = 0; i < PATHS_INI; i++){
+    int countSlaveFiles[child];
+    for ( i = 0; i < child; i++) {
+        countSlaveFiles[i] = 0;
+    }
+    for (i = 0; i < pathsIni; i++){
         char path[4096]={0};
         strcat(path,argv[i+1]);
         strcat(path,"\n");
 
-        checkError(write(fd[i%NUM_CHILD][WRITE],path ,strlen(path)),"write");
+        checkError(write(fd[i%child][WRITE],path ,strlen(path)),"write");
         fileSentCount++;
+        countSlaveFiles[i%child]++;
     }
-
     int fileRecivedCount = 0;
 
     //loop
@@ -51,7 +58,7 @@ int main(int argc, char const *argv[]){
         fd_set readfds;
         FD_ZERO(&readfds);
         int i,max=0;
-        for (i = 0; i < NUM_CHILD; i++){
+        for (i = 0; i < child; i++){
             if (fd[i][READ] > 0) {
                 max = (fd[i][READ]>max)?fd[i][READ] : max;
                 FD_SET(fd[i][READ], &readfds);
@@ -60,7 +67,7 @@ int main(int argc, char const *argv[]){
         int ready=0;
         checkError((ready=select(max+1, &readfds, NULL, NULL, NULL)),"select");
 
-        for (i = 0; i < NUM_CHILD && ready > 0; i++){
+        for (i = 0; i < child && ready > 0; i++){
             if(FD_ISSET(fd[i][READ], &readfds) != 0){
 
                 //recibo un file
@@ -74,37 +81,38 @@ int main(int argc, char const *argv[]){
                 //escribir en result.txt
                 fprintf(result,"%s \n", buff);
 
-                if(fileRecivedCount > (argc-(PATHS_INI-NUM_CHILD)+1)){  //voy cerrando los hijos que le queda un solo
+                if(fileRecivedCount > (argc-(pathsIni-child)+1)){ 
                     fd[i][READ] = -1;
                 }
 
                 //envio respuesta el viewer
                 checkError(sprintf((char *)(pntShm),"%s \n", buff),"sprint");
-                checkError(sem_post(semShm),"post sem"); //revisar
+                checkError(sem_post(semShm),"post sem"); 
                 pntShm += STEP_SHM;
-
+                countSlaveFiles[i]--;
                 //envio tasks
-                if (fileSentCount < argc-1) {
+                if (countSlaveFiles[i]==0) {
+                    if (fileSentCount < argc-1) {
                     char path[4096]={0};
                     char *vec;
                     vec = strcat(path,argv[fileSentCount+1]);
                     vec = strcat(vec,"\n");
 
-                    checkError(write(fd[i][WRITE],vec ,strlen(vec)),"wirte_sendTasks");
+                    checkError(write(fd[i][WRITE],vec ,strlen(vec)),"write_sendTasks");
                     fileSentCount++;
+                    countSlaveFiles[i]++;
+                    }
                 }
+                
+                
                 ready--;
             }
         }
     }
-
-    //printf("%d \n",fileRecivedCount);
-    close(fd[i][READ]);
-    close(fd[i][WRITE]);
-    fclose(result);
-    munmap(pntShm,sizeShm);
-    close(fdShm); //solo en el slove.c
-    shm_unlink(SHM_NAME);
+    checkError(fclose(result),"close_result.txt");
+    checkError(munmap(pntShmIni,sizeShm),"munmap");
+    checkError(close(fdShm)," fd colse");
+    checkError(sem_close(semShm),"sem_close");
 
     return 0;
 }
