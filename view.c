@@ -15,6 +15,7 @@ int main(int argc, char const *argv[]) {
 
         checkError(getline(&line, &len, stdin),"getting line");
         char *tok = strtok(line, " ");
+        if (tok==NULL) exit(EXIT_FAILURE);
         strcpy(nameShm, tok);
         tok = strtok(NULL, " ");
         if (tok==NULL) exit(EXIT_FAILURE);
@@ -45,7 +46,6 @@ int main(int argc, char const *argv[]) {
     sem_t *semShm = sem_open("semShm", O_CREAT, 0600, 0);
     checkErrno(semShm,"semaphore",SEM_FAILED);
 
-    //char* shOriginal = (char *) sharedMemory;
     char* shIndex = (char *) sharedMemory;
 
     //el while para espear y leer de emoria compartida

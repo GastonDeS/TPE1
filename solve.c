@@ -69,7 +69,7 @@ int main(int argc, char const *argv[]){
         checkError(ready,"select");
 
         for (i = 0; i < child && ready > 0; i++){
-            if(FD_ISSET(fd[i][READ], &readfds) != 0){
+            if(FD_ISSET(fd[i][READ], &readfds)){
 
                 //recibo un file
                 char buff[512]={0};
