@@ -17,8 +17,10 @@ int main(int argc, char const *argv[]) {
         char *tok = strtok(line, " ");
         strcpy(nameShm, tok);
         tok = strtok(NULL, " ");
+        if (tok==NULL) exit(EXIT_FAILURE);
         sizeShm = atoi(tok);
         tok = strtok(NULL, " ");
+        if (tok==NULL) exit(EXIT_FAILURE);
         fileCount = atoi(tok);
         free(line);
     } else if ( argc == 4) {

@@ -20,7 +20,7 @@ user@linux:$ make all
     En una terminal:
         user@linux:$ ./solve files/.../*
 
-    En  la segunda terminar:
+    En otra terminal:
         user@linux:$ ./view (output de ./solve)
 
 Autores: Gaston De Schant, Felipe Cupito, Segundo Espina Mairal
