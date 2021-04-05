@@ -3,7 +3,7 @@
 int main(int argc, char const *argv[]){
 
     if (argc == 1) {
-        printf("bad argument count/n");
+        printf("bad argument count \n");
         return 1;
     }
     int child= NUM_CHILD;
@@ -17,18 +17,19 @@ int main(int argc, char const *argv[]){
     off_t sizeShm = STEP_SHM*(argc-1);
     int fdShm;
     void * pntShm;
-    sem_t *semShm;
-    FILE* result;
     void* pntShmIni;
 
-    checkErrno((result=fopen(RESULT_FILE_NAME, "w")), "open result file", NULL);
+    FILE* result=fopen(RESULT_FILE_NAME, "w");
+    checkErrno(result, "open result file", NULL);
 
     if(setvbuf(stdout, NULL, _IONBF, 0))
         perror("Error setvbuf");
 
     pntShm = initShM(SHM_NAME, &fdShm, &sizeShm);
     pntShmIni = pntShm;
-    checkErrno((semShm=sem_open("semShm", O_CREAT, 0600, 0)), "sem_open", SEM_FAILED);
+
+    sem_t *semShm = sem_open("semShm", O_CREAT, 0600, 0);
+    checkErrno(semShm, "sem_open", SEM_FAILED);
 
     printf("%s %d %d\n", SHM_NAME, (int)sizeShm,argc-1); //impreimo datos necesarios para view
     sleep(2);
@@ -64,8 +65,8 @@ int main(int argc, char const *argv[]){
                 FD_SET(fd[i][READ], &readfds);
             }
         }
-        int ready=0;
-        checkError((ready=select(max+1, &readfds, NULL, NULL, NULL)),"select");
+        int ready = select(max+1, &readfds, NULL, NULL, NULL);
+        checkError(ready,"select");
 
         for (i = 0; i < child && ready > 0; i++){
             if(FD_ISSET(fd[i][READ], &readfds) != 0){
@@ -117,11 +118,11 @@ int main(int argc, char const *argv[]){
     return 0;
 }
 
-void* initShM(char* const name, int* fdShm, off_t* sizeShm){
-    void* pntShm;
+void* initShM(char* const name, int* fdShm, off_t* sizeShm){ 
     checkError( ((*fdShm)=shm_open(name, O_CREAT | O_RDWR, 0666)) , "shmopen");
     checkError(ftruncate(*fdShm, *sizeShm),"ftrunate" );
-    checkErrno( (pntShm=mmap(NULL, *sizeShm, PROT_WRITE, MAP_SHARED, *fdShm, 0)) , "SHM_map", MAP_FAILED);
+    void* pntShm = mmap(NULL, *sizeShm, PROT_WRITE, MAP_SHARED, *fdShm, 0);
+    checkErrno(pntShm , "SHM_map", MAP_FAILED);
     return pntShm;
 }
 
